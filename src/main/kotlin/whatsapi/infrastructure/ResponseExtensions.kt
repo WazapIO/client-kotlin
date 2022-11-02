@@ -1,4 +1,4 @@
-package whatsapi.infrastructure
+package WhatsAPI.infrastructure
 
 import okhttp3.Response
 

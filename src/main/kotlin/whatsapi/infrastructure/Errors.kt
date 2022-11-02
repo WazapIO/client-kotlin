@@ -1,5 +1,5 @@
 @file:Suppress("unused")
-package whatsapi.infrastructure
+package WhatsAPI.infrastructure
 
 import java.lang.RuntimeException
 

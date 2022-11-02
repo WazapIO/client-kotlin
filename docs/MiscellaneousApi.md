@@ -19,8 +19,8 @@ Returns the profile pic of the given user.
 ### Example
 ```kotlin
 // Import classes:
-//import whatsapi.infrastructure.*
-//import whatsapi.models.*
+//import WhatsAPI.infrastructure.*
+//import models.*
 
 val apiInstance = MiscellaneousApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -71,8 +71,8 @@ Gets the user info for the given user ids. This does not checks if user is regis
 ### Example
 ```kotlin
 // Import classes:
-//import whatsapi.infrastructure.*
-//import whatsapi.models.*
+//import WhatsAPI.infrastructure.*
+//import models.*
 
 val apiInstance = MiscellaneousApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key

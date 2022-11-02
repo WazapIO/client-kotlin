@@ -1,4 +1,4 @@
-package whatsapi.infrastructure
+package WhatsAPI.infrastructure
 
 /**
  * Defines a config object for a given request.

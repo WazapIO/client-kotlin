@@ -1,4 +1,4 @@
-package whatsapi.infrastructure
+package WhatsAPI.infrastructure
 
 enum class ResponseType {
     Success, Informational, Redirection, ClientError, ServerError

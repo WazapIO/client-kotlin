@@ -1,4 +1,4 @@
-package whatsapi.infrastructure
+package WhatsAPI.infrastructure
 
 typealias MultiValueMap = MutableMap<String,List<String>>
 

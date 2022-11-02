@@ -1,4 +1,4 @@
-package whatsapi.infrastructure
+package WhatsAPI.infrastructure
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
