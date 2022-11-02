@@ -25,8 +25,8 @@ This endpoint is used to create a new WhatsApp Web instance.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Insert instance key if you want to provide custom key
@@ -75,8 +75,8 @@ Fetches the list of contacts in the instance.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -125,8 +125,8 @@ Deletes the instance with the provided key.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -175,8 +175,8 @@ Returns the instance data of single instance with connection status.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -225,8 +225,8 @@ Logouts of the instance with the provided key.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -275,8 +275,8 @@ Returns the qrcode in the base64 format.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -325,8 +325,8 @@ Changes the webhook url of an instance.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -377,8 +377,8 @@ Fetches the list of all Instances with login status.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = InstanceApi()
 try {

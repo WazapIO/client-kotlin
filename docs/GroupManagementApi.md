@@ -33,8 +33,8 @@ Returns list of all groups in which you are admin.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -83,8 +83,8 @@ Creates a group with the participant data. The creator is automatically added to
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -135,8 +135,8 @@ Returns list of all groups with participants data. Set include_participants to f
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -187,8 +187,8 @@ Set if non-admins are allowed to send messages in groups
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -241,8 +241,8 @@ Leaves the specified group.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -293,8 +293,8 @@ Changes the group description
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -347,8 +347,8 @@ Fetches the group data.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -399,8 +399,8 @@ Gets the invite code of the group.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -451,8 +451,8 @@ Set if non-admins are allowed to change the group dp and other stuff
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -505,8 +505,8 @@ Changes the group name. The max limit is 22 chars
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -559,8 +559,8 @@ Handles adding participants to a group. You must be admin in the group or the qu
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -613,8 +613,8 @@ Demotes admins in groups. You must be admin in the group or the query will fail.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -667,8 +667,8 @@ Promotes participants to admin. You must be admin in the group or the query will
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -721,8 +721,8 @@ Handles removing participants from a group. You must be admin in the group or th
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -775,8 +775,8 @@ Changes the group profile picture. Currently it only seems to accept JPEG images
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -829,8 +829,8 @@ Gets a group info from an invite link. An invite link is a link that can be used
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import org.openapitools.client.models.*
+//import com.whatsapi.infrastructure.*
+//import com.whatsapi.models.*
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
