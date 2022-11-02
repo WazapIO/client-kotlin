@@ -33,8 +33,8 @@ Gets list of all products registered by you.
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -83,8 +83,8 @@ Sends a audio message by uploading to the WhatsApp servers every time. This is n
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -139,8 +139,8 @@ Sends an interactive button message to the given user. This message also has med
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -191,8 +191,8 @@ Sends an interactive button message to the given user. Make sure that all the bu
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -243,8 +243,8 @@ Sends a contact (vcard) message to the given user.
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -295,8 +295,8 @@ Sends a document message by uploading to the WhatsApp servers every time. This i
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -351,8 +351,8 @@ Sends a image message by uploading to the WhatsApp servers every time. This is n
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -407,8 +407,8 @@ Sends an interactive List message to the given user.
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -459,8 +459,8 @@ Sends a location message to the given user. This is static location and does not
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -511,8 +511,8 @@ Sends a media message to the given user.
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -563,8 +563,8 @@ Sends an interactive poll message with a media header to the given user. The pol
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -615,8 +615,8 @@ Sends an interactive template message with a media header to the given user. Not
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -667,8 +667,8 @@ Sends an interactive template message to the given user. Note: The valid button 
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -719,8 +719,8 @@ Sends a text message to the given user.
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -771,8 +771,8 @@ Uploads media to WhatsApp servers and returns the media keys. Store the returned
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
@@ -825,8 +825,8 @@ Sends a video message by uploading to the WhatsApp servers every time. This is n
 ### Example
 ```kotlin
 // Import classes:
-//import com.whatsapi.infrastructure.*
-//import com.whatsapi.models.*
+//import whatsapi.infrastructure.*
+//import whatsapi.models.*
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
