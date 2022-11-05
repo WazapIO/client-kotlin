@@ -44,48 +44,48 @@ All URIs are relative to */api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BusinessManagementApi* | [**instancesInstanceKeyBusinessCatalogGet**](docs/BusinessManagementApi.md#instancesinstancekeybusinesscatalogget) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsAdminGet**](docs/GroupManagementApi.md#instancesinstancekeygroupsadminget) | **GET** /instances/{instance_key}/groups/admin | Get admin groupss.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsCreatePost**](docs/GroupManagementApi.md#instancesinstancekeygroupscreatepost) | **POST** /instances/{instance_key}/groups/create | Create group.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGet**](docs/GroupManagementApi.md#instancesinstancekeygroupsget) | **GET** /instances/{instance_key}/groups/ | Get all groups.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdAnnouncePut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidannounceput) | **PUT** /instances/{instance_key}/groups/{group_id}/announce | Set group announce.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdDelete**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupiddelete) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdDescriptionPut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupiddescriptionput) | **PUT** /instances/{instance_key}/groups/{group_id}/description | Set group description.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdGet**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidget) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdInviteCodeGet**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidinvitecodeget) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdLockPut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidlockput) | **PUT** /instances/{instance_key}/groups/{group_id}/lock | Set group locked.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdNamePut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidnameput) | **PUT** /instances/{instance_key}/groups/{group_id}/name | Set group name.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsAddPost**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantsaddpost) | **POST** /instances/{instance_key}/groups/{group_id}/participants/add | Add participant.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsDemotePut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantsdemoteput) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsPromotePut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantspromoteput) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantsremovedelete) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdProfilePicPut**](docs/GroupManagementApi.md#instancesinstancekeygroupsgroupidprofilepicput) | **PUT** /instances/{instance_key}/groups/{group_id}/profile-pic | Set group picture.
-*GroupManagementApi* | [**instancesInstanceKeyGroupsInviteInfoGet**](docs/GroupManagementApi.md#instancesinstancekeygroupsinviteinfoget) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
-*InstanceApi* | [**instancesCreateGet**](docs/InstanceApi.md#instancescreateget) | **GET** /instances/create | Creates a new instance key.
-*InstanceApi* | [**instancesInstanceKeyContactsGet**](docs/InstanceApi.md#instancesinstancekeycontactsget) | **GET** /instances/{instance_key}/contacts | Get contacts.
-*InstanceApi* | [**instancesInstanceKeyDeleteDelete**](docs/InstanceApi.md#instancesinstancekeydeletedelete) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
-*InstanceApi* | [**instancesInstanceKeyGet**](docs/InstanceApi.md#instancesinstancekeyget) | **GET** /instances/{instance_key}/ | Get Instance.
-*InstanceApi* | [**instancesInstanceKeyLogoutDelete**](docs/InstanceApi.md#instancesinstancekeylogoutdelete) | **DELETE** /instances/{instance_key}/logout | Logout Instance.
-*InstanceApi* | [**instancesInstanceKeyQrcodeGet**](docs/InstanceApi.md#instancesinstancekeyqrcodeget) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
-*InstanceApi* | [**instancesInstanceKeyWebhookPut**](docs/InstanceApi.md#instancesinstancekeywebhookput) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
-*InstanceApi* | [**instancesListGet**](docs/InstanceApi.md#instanceslistget) | **GET** /instances/list | Get all instances.
-*MessageSendingApi* | [**instancesInstanceKeySendAudioPost**](docs/MessageSendingApi.md#instancesinstancekeysendaudiopost) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
-*MessageSendingApi* | [**instancesInstanceKeySendButtonMediaPost**](docs/MessageSendingApi.md#instancesinstancekeysendbuttonmediapost) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
-*MessageSendingApi* | [**instancesInstanceKeySendButtonsPost**](docs/MessageSendingApi.md#instancesinstancekeysendbuttonspost) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
-*MessageSendingApi* | [**instancesInstanceKeySendContactPost**](docs/MessageSendingApi.md#instancesinstancekeysendcontactpost) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
-*MessageSendingApi* | [**instancesInstanceKeySendDocumentPost**](docs/MessageSendingApi.md#instancesinstancekeysenddocumentpost) | **POST** /instances/{instance_key}/send/document | Send raw document.
-*MessageSendingApi* | [**instancesInstanceKeySendImagePost**](docs/MessageSendingApi.md#instancesinstancekeysendimagepost) | **POST** /instances/{instance_key}/send/image | Send raw image.
-*MessageSendingApi* | [**instancesInstanceKeySendListPost**](docs/MessageSendingApi.md#instancesinstancekeysendlistpost) | **POST** /instances/{instance_key}/send/list | Send a List message.
-*MessageSendingApi* | [**instancesInstanceKeySendLocationPost**](docs/MessageSendingApi.md#instancesinstancekeysendlocationpost) | **POST** /instances/{instance_key}/send/location | Send a location message.
-*MessageSendingApi* | [**instancesInstanceKeySendMediaPost**](docs/MessageSendingApi.md#instancesinstancekeysendmediapost) | **POST** /instances/{instance_key}/send/media | Send a media message.
-*MessageSendingApi* | [**instancesInstanceKeySendPollPost**](docs/MessageSendingApi.md#instancesinstancekeysendpollpost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
-*MessageSendingApi* | [**instancesInstanceKeySendTemplateMediaPost**](docs/MessageSendingApi.md#instancesinstancekeysendtemplatemediapost) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
-*MessageSendingApi* | [**instancesInstanceKeySendTemplatePost**](docs/MessageSendingApi.md#instancesinstancekeysendtemplatepost) | **POST** /instances/{instance_key}/send/template | Send a template message.
-*MessageSendingApi* | [**instancesInstanceKeySendTextPost**](docs/MessageSendingApi.md#instancesinstancekeysendtextpost) | **POST** /instances/{instance_key}/send/text | Send a text message.
-*MessageSendingApi* | [**instancesInstanceKeySendUploadPost**](docs/MessageSendingApi.md#instancesinstancekeysenduploadpost) | **POST** /instances/{instance_key}/send/upload | Upload media.
-*MessageSendingApi* | [**instancesInstanceKeySendVideoPost**](docs/MessageSendingApi.md#instancesinstancekeysendvideopost) | **POST** /instances/{instance_key}/send/video | Send raw video.
-*MiscellaneousApi* | [**instancesInstanceKeyMiscProfilePicGet**](docs/MiscellaneousApi.md#instancesinstancekeymiscprofilepicget) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
-*MiscellaneousApi* | [**instancesInstanceKeyMiscUserInfoPost**](docs/MiscellaneousApi.md#instancesinstancekeymiscuserinfopost) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
+*BusinessManagementApi* | [**fetchCatlog**](docs/BusinessManagementApi.md#fetchcatlog) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
+*GroupManagementApi* | [**addParticipant**](docs/GroupManagementApi.md#addparticipant) | **POST** /instances/{instance_key}/groups/{group_id}/participants/add | Add participant.
+*GroupManagementApi* | [**createGroup**](docs/GroupManagementApi.md#creategroup) | **POST** /instances/{instance_key}/groups/create | Create group.
+*GroupManagementApi* | [**demoteParticipant**](docs/GroupManagementApi.md#demoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
+*GroupManagementApi* | [**getAdminGroups**](docs/GroupManagementApi.md#getadmingroups) | **GET** /instances/{instance_key}/groups/admin | Get admin groups.
+*GroupManagementApi* | [**getAllGroups**](docs/GroupManagementApi.md#getallgroups) | **GET** /instances/{instance_key}/groups/ | Get all groups.
+*GroupManagementApi* | [**getGroup**](docs/GroupManagementApi.md#getgroup) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
+*GroupManagementApi* | [**getGroupFromInviteLink**](docs/GroupManagementApi.md#getgroupfrominvitelink) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
+*GroupManagementApi* | [**getGroupInviteCode**](docs/GroupManagementApi.md#getgroupinvitecode) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
+*GroupManagementApi* | [**leaveGroup**](docs/GroupManagementApi.md#leavegroup) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
+*GroupManagementApi* | [**promoteParticipant**](docs/GroupManagementApi.md#promoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
+*GroupManagementApi* | [**removeParticipant**](docs/GroupManagementApi.md#removeparticipant) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
+*GroupManagementApi* | [**setGroupAnnounce**](docs/GroupManagementApi.md#setgroupannounce) | **PUT** /instances/{instance_key}/groups/{group_id}/announce | Set group announce.
+*GroupManagementApi* | [**setGroupDescription**](docs/GroupManagementApi.md#setgroupdescription) | **PUT** /instances/{instance_key}/groups/{group_id}/description | Set group description.
+*GroupManagementApi* | [**setGroupLocked**](docs/GroupManagementApi.md#setgrouplocked) | **PUT** /instances/{instance_key}/groups/{group_id}/lock | Set group locked.
+*GroupManagementApi* | [**setGroupName**](docs/GroupManagementApi.md#setgroupname) | **PUT** /instances/{instance_key}/groups/{group_id}/name | Set group name.
+*GroupManagementApi* | [**setGroupPicture**](docs/GroupManagementApi.md#setgrouppicture) | **PUT** /instances/{instance_key}/groups/{group_id}/profile-pic | Set group picture.
+*InstanceApi* | [**changeWebhookUrl**](docs/InstanceApi.md#changewebhookurl) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
+*InstanceApi* | [**createInstance**](docs/InstanceApi.md#createinstance) | **GET** /instances/create | Creates a new instance key.
+*InstanceApi* | [**deleteInstance**](docs/InstanceApi.md#deleteinstance) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
+*InstanceApi* | [**getContacts**](docs/InstanceApi.md#getcontacts) | **GET** /instances/{instance_key}/contacts | Get contacts.
+*InstanceApi* | [**getInstance**](docs/InstanceApi.md#getinstance) | **GET** /instances/{instance_key}/ | Get Instance.
+*InstanceApi* | [**getQrCode**](docs/InstanceApi.md#getqrcode) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
+*InstanceApi* | [**listInstances**](docs/InstanceApi.md#listinstances) | **GET** /instances/list | Get all instances.
+*InstanceApi* | [**logoutInstance**](docs/InstanceApi.md#logoutinstance) | **DELETE** /instances/{instance_key}/logout | Logout Instance.
+*MessageSendingApi* | [**sendAudio**](docs/MessageSendingApi.md#sendaudio) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
+*MessageSendingApi* | [**sendButtonMessage**](docs/MessageSendingApi.md#sendbuttonmessage) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
+*MessageSendingApi* | [**sendButtonWithMedia**](docs/MessageSendingApi.md#sendbuttonwithmedia) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
+*MessageSendingApi* | [**sendContact**](docs/MessageSendingApi.md#sendcontact) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
+*MessageSendingApi* | [**sendDocument**](docs/MessageSendingApi.md#senddocument) | **POST** /instances/{instance_key}/send/document | Send raw document.
+*MessageSendingApi* | [**sendImage**](docs/MessageSendingApi.md#sendimage) | **POST** /instances/{instance_key}/send/image | Send raw image.
+*MessageSendingApi* | [**sendListMessage**](docs/MessageSendingApi.md#sendlistmessage) | **POST** /instances/{instance_key}/send/list | Send a List message.
+*MessageSendingApi* | [**sendLocation**](docs/MessageSendingApi.md#sendlocation) | **POST** /instances/{instance_key}/send/location | Send a location message.
+*MessageSendingApi* | [**sendMediaMessage**](docs/MessageSendingApi.md#sendmediamessage) | **POST** /instances/{instance_key}/send/media | Send a media message.
+*MessageSendingApi* | [**sendPollMessage**](docs/MessageSendingApi.md#sendpollmessage) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
+*MessageSendingApi* | [**sendTemplate**](docs/MessageSendingApi.md#sendtemplate) | **POST** /instances/{instance_key}/send/template | Send a template message.
+*MessageSendingApi* | [**sendTemplateWithMedia**](docs/MessageSendingApi.md#sendtemplatewithmedia) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
+*MessageSendingApi* | [**sendTextMessage**](docs/MessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
+*MessageSendingApi* | [**sendVideo**](docs/MessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
+*MessageSendingApi* | [**uploadMedia**](docs/MessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+*MiscellaneousApi* | [**getProfilePic**](docs/MiscellaneousApi.md#getprofilepic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
+*MiscellaneousApi* | [**getUsersInfo**](docs/MiscellaneousApi.md#getusersinfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
 
 
 <a name="documentation-for-models"></a>
@@ -101,12 +101,6 @@ Class | Method | HTTP request | Description
  - [models.GroupUpdateDescriptionPayload](docs/GroupUpdateDescriptionPayload.md)
  - [models.GroupUpdateNamePayload](docs/GroupUpdateNamePayload.md)
  - [models.GroupUpdateParticipantsPayload](docs/GroupUpdateParticipantsPayload.md)
- - [models.InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest](docs/InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.md)
- - [models.InstancesInstanceKeySendAudioPostRequest](docs/InstancesInstanceKeySendAudioPostRequest.md)
- - [models.InstancesInstanceKeySendDocumentPostRequest](docs/InstancesInstanceKeySendDocumentPostRequest.md)
- - [models.InstancesInstanceKeySendImagePostRequest](docs/InstancesInstanceKeySendImagePostRequest.md)
- - [models.InstancesInstanceKeySendUploadPostRequest](docs/InstancesInstanceKeySendUploadPostRequest.md)
- - [models.InstancesInstanceKeySendVideoPostRequest](docs/InstancesInstanceKeySendVideoPostRequest.md)
  - [models.ListItem](docs/ListItem.md)
  - [models.ListMessagePayload](docs/ListMessagePayload.md)
  - [models.ListSection](docs/ListSection.md)
@@ -114,11 +108,17 @@ Class | Method | HTTP request | Description
  - [models.LocationMessagePayloadLocation](docs/LocationMessagePayloadLocation.md)
  - [models.PollMessagePayload](docs/PollMessagePayload.md)
  - [models.ReplyButton](docs/ReplyButton.md)
+ - [models.SendAudioRequest](docs/SendAudioRequest.md)
+ - [models.SendDocumentRequest](docs/SendDocumentRequest.md)
+ - [models.SendImageRequest](docs/SendImageRequest.md)
  - [models.SendMediaPayload](docs/SendMediaPayload.md)
+ - [models.SendVideoRequest](docs/SendVideoRequest.md)
+ - [models.SetGroupPictureRequest](docs/SetGroupPictureRequest.md)
  - [models.TemplateButton](docs/TemplateButton.md)
  - [models.TemplateButtonPayload](docs/TemplateButtonPayload.md)
  - [models.TemplateButtonWithMediaPayload](docs/TemplateButtonWithMediaPayload.md)
  - [models.TextMessage](docs/TextMessage.md)
+ - [models.UploadMediaRequest](docs/UploadMediaRequest.md)
  - [models.UserInfoPayload](docs/UserInfoPayload.md)
  - [models.WebhookPayload](docs/WebhookPayload.md)
 

@@ -4,12 +4,12 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesInstanceKeyBusinessCatalogGet**](BusinessManagementApi.md#instancesInstanceKeyBusinessCatalogGet) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
+[**fetchCatlog**](BusinessManagementApi.md#fetchCatlog) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
 
 
-<a name="instancesInstanceKeyBusinessCatalogGet"></a>
-# **instancesInstanceKeyBusinessCatalogGet**
-> APIResponse instancesInstanceKeyBusinessCatalogGet(instanceKey)
+<a name="fetchCatlog"></a>
+# **fetchCatlog**
+> APIResponse fetchCatlog(instanceKey)
 
 Fetches the catlog.
 
@@ -24,13 +24,13 @@ Gets list of all products registered by you.
 val apiInstance = BusinessManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyBusinessCatalogGet(instanceKey)
+    val result : APIResponse = apiInstance.fetchCatlog(instanceKey)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling BusinessManagementApi#instancesInstanceKeyBusinessCatalogGet")
+    println("4xx response calling BusinessManagementApi#fetchCatlog")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling BusinessManagementApi#instancesInstanceKeyBusinessCatalogGet")
+    println("5xx response calling BusinessManagementApi#fetchCatlog")
     e.printStackTrace()
 }
 ```

@@ -23,18 +23,18 @@ import models.APIResponse
 import models.ButtonMessagePayload
 import models.ButtonMessageWithMediaPayload
 import models.ContactMessagePayload
-import models.InstancesInstanceKeySendAudioPostRequest
-import models.InstancesInstanceKeySendDocumentPostRequest
-import models.InstancesInstanceKeySendImagePostRequest
-import models.InstancesInstanceKeySendUploadPostRequest
-import models.InstancesInstanceKeySendVideoPostRequest
 import models.ListMessagePayload
 import models.LocationMessagePayload
 import models.PollMessagePayload
+import models.SendAudioRequest
+import models.SendDocumentRequest
+import models.SendImageRequest
 import models.SendMediaPayload
+import models.SendVideoRequest
 import models.TemplateButtonPayload
 import models.TemplateButtonWithMediaPayload
 import models.TextMessage
+import models.UploadMediaRequest
 
 import com.squareup.moshi.Json
 
@@ -65,7 +65,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a audio message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendAudioPostRequest 
+     * @param sendAudioRequest 
      * @param caption Attached caption (optional)
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -76,8 +76,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendAudioPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String? = null) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendAudioPostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendAudioPostRequest = instancesInstanceKeySendAudioPostRequest, caption = caption)
+    fun sendAudio(instanceKey: kotlin.String, to: kotlin.String, sendAudioRequest: SendAudioRequest, caption: kotlin.String? = null) : APIResponse {
+        val localVarResponse = sendAudioWithHttpInfo(instanceKey = instanceKey, to = to, sendAudioRequest = sendAudioRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -99,7 +99,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a audio message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendAudioPostRequest 
+     * @param sendAudioRequest 
      * @param caption Attached caption (optional)
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -107,25 +107,25 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendAudioPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendAudioPostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendAudioPostRequest = instancesInstanceKeySendAudioPostRequest, caption = caption)
+    fun sendAudioWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, sendAudioRequest: SendAudioRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendAudioRequestConfig(instanceKey = instanceKey, to = to, sendAudioRequest = sendAudioRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendAudioPostRequest, APIResponse>(
+        return request<SendAudioRequest, APIResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendAudioPost
+     * To obtain the request config of the operation sendAudio
      *
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendAudioPostRequest 
+     * @param sendAudioRequest 
      * @param caption Attached caption (optional)
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendAudioPostRequestConfig(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String?) : RequestConfig<InstancesInstanceKeySendAudioPostRequest> {
-        val localVariableBody = instancesInstanceKeySendAudioPostRequest
+    fun sendAudioRequestConfig(instanceKey: kotlin.String, to: kotlin.String, sendAudioRequest: SendAudioRequest, caption: kotlin.String?) : RequestConfig<SendAudioRequest> {
+        val localVariableBody = sendAudioRequest
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("to", listOf(to.toString()))
@@ -146,79 +146,6 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * Send a button message with a media header.
-     * Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendButtonMediaPost(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendButtonMediaPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Send a button message with a media header.
-     * Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendButtonMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendButtonMediaPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
-
-        return request<ButtonMessageWithMediaPayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeySendButtonMediaPost
-     *
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeySendButtonMediaPostRequestConfig(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : RequestConfig<ButtonMessageWithMediaPayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/instances/{instance_key}/send/button-media".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Send a button message.
      * Sends an interactive button message to the given user. Make sure that all the button ids are unique
      * @param instanceKey Instance key
@@ -232,8 +159,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendButtonsPost(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendButtonsPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendButtonMessage(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : APIResponse {
+        val localVarResponse = sendButtonMessageWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -261,8 +188,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendButtonsPostWithHttpInfo(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendButtonsPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendButtonMessageWithHttpInfo(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendButtonMessageRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<ButtonMessagePayload, APIResponse>(
             localVariableConfig
@@ -270,13 +197,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendButtonsPost
+     * To obtain the request config of the operation sendButtonMessage
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendButtonsPostRequestConfig(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : RequestConfig<ButtonMessagePayload> {
+    fun sendButtonMessageRequestConfig(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : RequestConfig<ButtonMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -292,6 +219,79 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
+     * Send a button message with a media header.
+     * Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun sendButtonWithMedia(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : APIResponse {
+        val localVarResponse = sendButtonWithMediaWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Send a button message with a media header.
+     * Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun sendButtonWithMediaWithHttpInfo(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendButtonWithMediaRequestConfig(instanceKey = instanceKey, `data` = `data`)
+
+        return request<ButtonMessageWithMediaPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation sendButtonWithMedia
+     *
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return RequestConfig
+     */
+    fun sendButtonWithMediaRequestConfig(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : RequestConfig<ButtonMessageWithMediaPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/send/button-media".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Send a contact message.
      * Sends a contact (vcard) message to the given user.
      * @param instanceKey Instance key
@@ -305,8 +305,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendContactPost(instanceKey: kotlin.String, `data`: ContactMessagePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendContactPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendContact(instanceKey: kotlin.String, `data`: ContactMessagePayload) : APIResponse {
+        val localVarResponse = sendContactWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -334,8 +334,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendContactPostWithHttpInfo(instanceKey: kotlin.String, `data`: ContactMessagePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendContactPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendContactWithHttpInfo(instanceKey: kotlin.String, `data`: ContactMessagePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendContactRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<ContactMessagePayload, APIResponse>(
             localVariableConfig
@@ -343,13 +343,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendContactPost
+     * To obtain the request config of the operation sendContact
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendContactPostRequestConfig(instanceKey: kotlin.String, `data`: ContactMessagePayload) : RequestConfig<ContactMessagePayload> {
+    fun sendContactRequestConfig(instanceKey: kotlin.String, `data`: ContactMessagePayload) : RequestConfig<ContactMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -369,7 +369,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a document message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendDocumentPostRequest 
+     * @param sendDocumentRequest 
      * @param caption Attached caption (optional)
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -380,8 +380,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendDocumentPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String? = null) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendDocumentPostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendDocumentPostRequest = instancesInstanceKeySendDocumentPostRequest, caption = caption)
+    fun sendDocument(instanceKey: kotlin.String, to: kotlin.String, sendDocumentRequest: SendDocumentRequest, caption: kotlin.String? = null) : APIResponse {
+        val localVarResponse = sendDocumentWithHttpInfo(instanceKey = instanceKey, to = to, sendDocumentRequest = sendDocumentRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -403,7 +403,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a document message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendDocumentPostRequest 
+     * @param sendDocumentRequest 
      * @param caption Attached caption (optional)
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -411,25 +411,25 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendDocumentPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendDocumentPostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendDocumentPostRequest = instancesInstanceKeySendDocumentPostRequest, caption = caption)
+    fun sendDocumentWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, sendDocumentRequest: SendDocumentRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendDocumentRequestConfig(instanceKey = instanceKey, to = to, sendDocumentRequest = sendDocumentRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendDocumentPostRequest, APIResponse>(
+        return request<SendDocumentRequest, APIResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendDocumentPost
+     * To obtain the request config of the operation sendDocument
      *
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendDocumentPostRequest 
+     * @param sendDocumentRequest 
      * @param caption Attached caption (optional)
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendDocumentPostRequestConfig(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String?) : RequestConfig<InstancesInstanceKeySendDocumentPostRequest> {
-        val localVariableBody = instancesInstanceKeySendDocumentPostRequest
+    fun sendDocumentRequestConfig(instanceKey: kotlin.String, to: kotlin.String, sendDocumentRequest: SendDocumentRequest, caption: kotlin.String?) : RequestConfig<SendDocumentRequest> {
+        val localVariableBody = sendDocumentRequest
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("to", listOf(to.toString()))
@@ -454,7 +454,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a image message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendImagePostRequest 
+     * @param sendImageRequest 
      * @param caption Attached caption (optional)
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -465,8 +465,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendImagePost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String? = null) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendImagePostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendImagePostRequest = instancesInstanceKeySendImagePostRequest, caption = caption)
+    fun sendImage(instanceKey: kotlin.String, to: kotlin.String, sendImageRequest: SendImageRequest, caption: kotlin.String? = null) : APIResponse {
+        val localVarResponse = sendImageWithHttpInfo(instanceKey = instanceKey, to = to, sendImageRequest = sendImageRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -488,7 +488,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a image message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendImagePostRequest 
+     * @param sendImageRequest 
      * @param caption Attached caption (optional)
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -496,25 +496,25 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendImagePostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendImagePostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendImagePostRequest = instancesInstanceKeySendImagePostRequest, caption = caption)
+    fun sendImageWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, sendImageRequest: SendImageRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendImageRequestConfig(instanceKey = instanceKey, to = to, sendImageRequest = sendImageRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendImagePostRequest, APIResponse>(
+        return request<SendImageRequest, APIResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendImagePost
+     * To obtain the request config of the operation sendImage
      *
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendImagePostRequest 
+     * @param sendImageRequest 
      * @param caption Attached caption (optional)
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendImagePostRequestConfig(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String?) : RequestConfig<InstancesInstanceKeySendImagePostRequest> {
-        val localVariableBody = instancesInstanceKeySendImagePostRequest
+    fun sendImageRequestConfig(instanceKey: kotlin.String, to: kotlin.String, sendImageRequest: SendImageRequest, caption: kotlin.String?) : RequestConfig<SendImageRequest> {
+        val localVariableBody = sendImageRequest
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("to", listOf(to.toString()))
@@ -548,8 +548,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendListPost(instanceKey: kotlin.String, `data`: ListMessagePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendListPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendListMessage(instanceKey: kotlin.String, `data`: ListMessagePayload) : APIResponse {
+        val localVarResponse = sendListMessageWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -577,8 +577,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendListPostWithHttpInfo(instanceKey: kotlin.String, `data`: ListMessagePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendListPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendListMessageWithHttpInfo(instanceKey: kotlin.String, `data`: ListMessagePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendListMessageRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<ListMessagePayload, APIResponse>(
             localVariableConfig
@@ -586,13 +586,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendListPost
+     * To obtain the request config of the operation sendListMessage
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendListPostRequestConfig(instanceKey: kotlin.String, `data`: ListMessagePayload) : RequestConfig<ListMessagePayload> {
+    fun sendListMessageRequestConfig(instanceKey: kotlin.String, `data`: ListMessagePayload) : RequestConfig<ListMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -621,8 +621,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendLocationPost(instanceKey: kotlin.String, `data`: LocationMessagePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendLocationPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendLocation(instanceKey: kotlin.String, `data`: LocationMessagePayload) : APIResponse {
+        val localVarResponse = sendLocationWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -650,8 +650,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendLocationPostWithHttpInfo(instanceKey: kotlin.String, `data`: LocationMessagePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendLocationPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendLocationWithHttpInfo(instanceKey: kotlin.String, `data`: LocationMessagePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendLocationRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<LocationMessagePayload, APIResponse>(
             localVariableConfig
@@ -659,13 +659,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendLocationPost
+     * To obtain the request config of the operation sendLocation
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendLocationPostRequestConfig(instanceKey: kotlin.String, `data`: LocationMessagePayload) : RequestConfig<LocationMessagePayload> {
+    fun sendLocationRequestConfig(instanceKey: kotlin.String, `data`: LocationMessagePayload) : RequestConfig<LocationMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -694,8 +694,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendMediaPost(instanceKey: kotlin.String, `data`: SendMediaPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendMediaPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendMediaMessage(instanceKey: kotlin.String, `data`: SendMediaPayload) : APIResponse {
+        val localVarResponse = sendMediaMessageWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -723,8 +723,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: SendMediaPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendMediaPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendMediaMessageWithHttpInfo(instanceKey: kotlin.String, `data`: SendMediaPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendMediaMessageRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<SendMediaPayload, APIResponse>(
             localVariableConfig
@@ -732,13 +732,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendMediaPost
+     * To obtain the request config of the operation sendMediaMessage
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendMediaPostRequestConfig(instanceKey: kotlin.String, `data`: SendMediaPayload) : RequestConfig<SendMediaPayload> {
+    fun sendMediaMessageRequestConfig(instanceKey: kotlin.String, `data`: SendMediaPayload) : RequestConfig<SendMediaPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -767,8 +767,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendPollPost(instanceKey: kotlin.String, `data`: PollMessagePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendPollPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendPollMessage(instanceKey: kotlin.String, `data`: PollMessagePayload) : APIResponse {
+        val localVarResponse = sendPollMessageWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -796,8 +796,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendPollPostWithHttpInfo(instanceKey: kotlin.String, `data`: PollMessagePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendPollPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendPollMessageWithHttpInfo(instanceKey: kotlin.String, `data`: PollMessagePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendPollMessageRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<PollMessagePayload, APIResponse>(
             localVariableConfig
@@ -805,13 +805,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendPollPost
+     * To obtain the request config of the operation sendPollMessage
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendPollPostRequestConfig(instanceKey: kotlin.String, `data`: PollMessagePayload) : RequestConfig<PollMessagePayload> {
+    fun sendPollMessageRequestConfig(instanceKey: kotlin.String, `data`: PollMessagePayload) : RequestConfig<PollMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -827,79 +827,6 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * Send a template message with media.
-     * Sends an interactive template message with a media header to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendTemplateMediaPost(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendTemplateMediaPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Send a template message with media.
-     * Sends an interactive template message with a media header to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendTemplateMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendTemplateMediaPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
-
-        return request<TemplateButtonWithMediaPayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeySendTemplateMediaPost
-     *
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeySendTemplateMediaPostRequestConfig(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : RequestConfig<TemplateButtonWithMediaPayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/instances/{instance_key}/send/template-media".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Send a template message.
      * Sends an interactive template message to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
      * @param instanceKey Instance key
@@ -913,8 +840,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendTemplatePost(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendTemplatePostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendTemplate(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : APIResponse {
+        val localVarResponse = sendTemplateWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -942,8 +869,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendTemplatePostWithHttpInfo(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendTemplatePostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendTemplateWithHttpInfo(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendTemplateRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<TemplateButtonPayload, APIResponse>(
             localVariableConfig
@@ -951,13 +878,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendTemplatePost
+     * To obtain the request config of the operation sendTemplate
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendTemplatePostRequestConfig(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : RequestConfig<TemplateButtonPayload> {
+    fun sendTemplateRequestConfig(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : RequestConfig<TemplateButtonPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -973,6 +900,79 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
+     * Send a template message with media.
+     * Sends an interactive template message with a media header to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun sendTemplateWithMedia(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : APIResponse {
+        val localVarResponse = sendTemplateWithMediaWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Send a template message with media.
+     * Sends an interactive template message with a media header to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun sendTemplateWithMediaWithHttpInfo(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendTemplateWithMediaRequestConfig(instanceKey = instanceKey, `data` = `data`)
+
+        return request<TemplateButtonWithMediaPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation sendTemplateWithMedia
+     *
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return RequestConfig
+     */
+    fun sendTemplateWithMediaRequestConfig(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : RequestConfig<TemplateButtonWithMediaPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/send/template-media".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Send a text message.
      * Sends a text message to the given user.
      * @param instanceKey Instance key
@@ -986,8 +986,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendTextPost(instanceKey: kotlin.String, `data`: TextMessage) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendTextPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun sendTextMessage(instanceKey: kotlin.String, `data`: TextMessage) : APIResponse {
+        val localVarResponse = sendTextMessageWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -1015,8 +1015,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendTextPostWithHttpInfo(instanceKey: kotlin.String, `data`: TextMessage) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendTextPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun sendTextMessageWithHttpInfo(instanceKey: kotlin.String, `data`: TextMessage) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendTextMessageRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<TextMessage, APIResponse>(
             localVariableConfig
@@ -1024,13 +1024,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendTextPost
+     * To obtain the request config of the operation sendTextMessage
      *
      * @param instanceKey Instance key
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendTextPostRequestConfig(instanceKey: kotlin.String, `data`: TextMessage) : RequestConfig<TextMessage> {
+    fun sendTextMessageRequestConfig(instanceKey: kotlin.String, `data`: TextMessage) : RequestConfig<TextMessage> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1046,100 +1046,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * enum for parameter type
-     */
-     enum class Type_instancesInstanceKeySendUploadPost(val value: kotlin.String) {
-         @Json(name = "image") image("image"),
-         @Json(name = "video") video("video"),
-         @Json(name = "audio") audio("audio"),
-         @Json(name = "document") document("document")
-     }
-
-    /**
-     * Upload media.
-     * Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
-     * @param instanceKey Instance key
-     * @param type Media type
-     * @param instancesInstanceKeySendUploadPostRequest 
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendUploadPost(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendUploadPostWithHttpInfo(instanceKey = instanceKey, type = type, instancesInstanceKeySendUploadPostRequest = instancesInstanceKeySendUploadPostRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Upload media.
-     * Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
-     * @param instanceKey Instance key
-     * @param type Media type
-     * @param instancesInstanceKeySendUploadPostRequest 
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendUploadPostWithHttpInfo(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendUploadPostRequestConfig(instanceKey = instanceKey, type = type, instancesInstanceKeySendUploadPostRequest = instancesInstanceKeySendUploadPostRequest)
-
-        return request<InstancesInstanceKeySendUploadPostRequest, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeySendUploadPost
-     *
-     * @param instanceKey Instance key
-     * @param type Media type
-     * @param instancesInstanceKeySendUploadPostRequest 
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeySendUploadPostRequestConfig(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : RequestConfig<InstancesInstanceKeySendUploadPostRequest> {
-        val localVariableBody = instancesInstanceKeySendUploadPostRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("type", listOf(type.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/instances/{instance_key}/send/upload".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Send raw video.
      * Sends a video message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendVideoPostRequest 
+     * @param sendVideoRequest 
      * @param caption Attached caption (optional)
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -1150,8 +1061,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendVideoPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String? = null) : APIResponse {
-        val localVarResponse = instancesInstanceKeySendVideoPostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendVideoPostRequest = instancesInstanceKeySendVideoPostRequest, caption = caption)
+    fun sendVideo(instanceKey: kotlin.String, to: kotlin.String, sendVideoRequest: SendVideoRequest, caption: kotlin.String? = null) : APIResponse {
+        val localVarResponse = sendVideoWithHttpInfo(instanceKey = instanceKey, to = to, sendVideoRequest = sendVideoRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -1173,7 +1084,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a video message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendVideoPostRequest 
+     * @param sendVideoRequest 
      * @param caption Attached caption (optional)
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1181,25 +1092,25 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendVideoPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeySendVideoPostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendVideoPostRequest = instancesInstanceKeySendVideoPostRequest, caption = caption)
+    fun sendVideoWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, sendVideoRequest: SendVideoRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendVideoRequestConfig(instanceKey = instanceKey, to = to, sendVideoRequest = sendVideoRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendVideoPostRequest, APIResponse>(
+        return request<SendVideoRequest, APIResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeySendVideoPost
+     * To obtain the request config of the operation sendVideo
      *
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param instancesInstanceKeySendVideoPostRequest 
+     * @param sendVideoRequest 
      * @param caption Attached caption (optional)
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendVideoPostRequestConfig(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String?) : RequestConfig<InstancesInstanceKeySendVideoPostRequest> {
-        val localVariableBody = instancesInstanceKeySendVideoPostRequest
+    fun sendVideoRequestConfig(instanceKey: kotlin.String, to: kotlin.String, sendVideoRequest: SendVideoRequest, caption: kotlin.String?) : RequestConfig<SendVideoRequest> {
+        val localVariableBody = sendVideoRequest
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("to", listOf(to.toString()))
@@ -1213,6 +1124,95 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/instances/{instance_key}/send/video".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter type
+     */
+     enum class Type_uploadMedia(val value: kotlin.String) {
+         @Json(name = "image") image("image"),
+         @Json(name = "video") video("video"),
+         @Json(name = "audio") audio("audio"),
+         @Json(name = "document") document("document")
+     }
+
+    /**
+     * Upload media.
+     * Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+     * @param instanceKey Instance key
+     * @param type Media type
+     * @param uploadMediaRequest 
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun uploadMedia(instanceKey: kotlin.String, type: Type_uploadMedia, uploadMediaRequest: UploadMediaRequest) : APIResponse {
+        val localVarResponse = uploadMediaWithHttpInfo(instanceKey = instanceKey, type = type, uploadMediaRequest = uploadMediaRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Upload media.
+     * Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+     * @param instanceKey Instance key
+     * @param type Media type
+     * @param uploadMediaRequest 
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun uploadMediaWithHttpInfo(instanceKey: kotlin.String, type: Type_uploadMedia, uploadMediaRequest: UploadMediaRequest) : ApiResponse<APIResponse?> {
+        val localVariableConfig = uploadMediaRequestConfig(instanceKey = instanceKey, type = type, uploadMediaRequest = uploadMediaRequest)
+
+        return request<UploadMediaRequest, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation uploadMedia
+     *
+     * @param instanceKey Instance key
+     * @param type Media type
+     * @param uploadMediaRequest 
+     * @return RequestConfig
+     */
+    fun uploadMediaRequestConfig(instanceKey: kotlin.String, type: Type_uploadMedia, uploadMediaRequest: UploadMediaRequest) : RequestConfig<UploadMediaRequest> {
+        val localVariableBody = uploadMediaRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("type", listOf(type.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/send/upload".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

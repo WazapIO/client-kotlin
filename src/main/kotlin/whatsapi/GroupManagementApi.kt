@@ -24,7 +24,7 @@ import models.GroupCreatePayload
 import models.GroupUpdateDescriptionPayload
 import models.GroupUpdateNamePayload
 import models.GroupUpdateParticipantsPayload
-import models.InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest
+import models.SetGroupPictureRequest
 
 import com.squareup.moshi.Json
 
@@ -51,9 +51,11 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * Get admin groupss.
-     * Returns list of all groups in which you are admin.
+     * Add participant.
+     * Handles adding participants to a group. You must be admin in the group or the query will fail.
      * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group update payload
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -63,8 +65,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsAdminGet(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsAdminGetWithHttpInfo(instanceKey = instanceKey)
+    fun addParticipant(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
+        val localVarResponse = addParticipantWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -82,37 +84,42 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * Get admin groupss.
-     * Returns list of all groups in which you are admin.
+     * Add participant.
+     * Handles adding participants to a group. You must be admin in the group or the query will fail.
      * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group update payload
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsAdminGetWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsAdminGetRequestConfig(instanceKey = instanceKey)
+    fun addParticipantWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = addParticipantRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
 
-        return request<Unit, APIResponse>(
+        return request<GroupUpdateParticipantsPayload, APIResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsAdminGet
+     * To obtain the request config of the operation addParticipant
      *
      * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group update payload
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsAdminGetRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun addParticipantRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
+        val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
         
         return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/instances/{instance_key}/groups/admin".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/groups/{group_id}/participants/add".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -133,8 +140,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsCreatePost(instanceKey: kotlin.String, `data`: GroupCreatePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsCreatePostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun createGroup(instanceKey: kotlin.String, `data`: GroupCreatePayload) : APIResponse {
+        val localVarResponse = createGroupWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -162,8 +169,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsCreatePostWithHttpInfo(instanceKey: kotlin.String, `data`: GroupCreatePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsCreatePostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun createGroupWithHttpInfo(instanceKey: kotlin.String, `data`: GroupCreatePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = createGroupRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<GroupCreatePayload, APIResponse>(
             localVariableConfig
@@ -171,13 +178,13 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsCreatePost
+     * To obtain the request config of the operation createGroup
      *
      * @param instanceKey Instance key
      * @param `data` Group create payload
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsCreatePostRequestConfig(instanceKey: kotlin.String, `data`: GroupCreatePayload) : RequestConfig<GroupCreatePayload> {
+    fun createGroupRequestConfig(instanceKey: kotlin.String, `data`: GroupCreatePayload) : RequestConfig<GroupCreatePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -193,9 +200,154 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
+     * Demote participant.
+     * Demotes admins in groups. You must be admin in the group or the query will fail.
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group update payload
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun demoteParticipant(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
+        val localVarResponse = demoteParticipantWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Demote participant.
+     * Demotes admins in groups. You must be admin in the group or the query will fail.
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group update payload
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun demoteParticipantWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = demoteParticipantRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+
+        return request<GroupUpdateParticipantsPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation demoteParticipant
+     *
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group update payload
+     * @return RequestConfig
+     */
+    fun demoteParticipantRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/groups/{group_id}/participants/demote".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Get admin groups.
+     * Returns list of all groups in which you are admin.
+     * @param instanceKey Instance key
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAdminGroups(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = getAdminGroupsWithHttpInfo(instanceKey = instanceKey)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Get admin groups.
+     * Returns list of all groups in which you are admin.
+     * @param instanceKey Instance key
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAdminGroupsWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getAdminGroupsRequestConfig(instanceKey = instanceKey)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAdminGroups
+     *
+     * @param instanceKey Instance key
+     * @return RequestConfig
+     */
+    fun getAdminGroupsRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/instances/{instance_key}/groups/admin".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * enum for parameter includeParticipants
      */
-     enum class IncludeParticipants_instancesInstanceKeyGroupsGet(val value: kotlin.String) {
+     enum class IncludeParticipants_getAllGroups(val value: kotlin.String) {
          @Json(name = "false") `false`("false"),
          @Json(name = "true") `true`("true")
      }
@@ -214,8 +366,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGet(instanceKey: kotlin.String, includeParticipants: IncludeParticipants_instancesInstanceKeyGroupsGet? = IncludeParticipants_instancesInstanceKeyGroupsGet.&#x60;true&#x60;) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGetWithHttpInfo(instanceKey = instanceKey, includeParticipants = includeParticipants)
+    fun getAllGroups(instanceKey: kotlin.String, includeParticipants: IncludeParticipants_getAllGroups? = IncludeParticipants_getAllGroups.&#x60;true&#x60;) : APIResponse {
+        val localVarResponse = getAllGroupsWithHttpInfo(instanceKey = instanceKey, includeParticipants = includeParticipants)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -243,8 +395,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGetWithHttpInfo(instanceKey: kotlin.String, includeParticipants: IncludeParticipants_instancesInstanceKeyGroupsGet?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGetRequestConfig(instanceKey = instanceKey, includeParticipants = includeParticipants)
+    fun getAllGroupsWithHttpInfo(instanceKey: kotlin.String, includeParticipants: IncludeParticipants_getAllGroups?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getAllGroupsRequestConfig(instanceKey = instanceKey, includeParticipants = includeParticipants)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -252,13 +404,13 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGet
+     * To obtain the request config of the operation getAllGroups
      *
      * @param instanceKey Instance key
      * @param includeParticipants Include participants data (optional, default to true)
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsGetRequestConfig(instanceKey: kotlin.String, includeParticipants: IncludeParticipants_instancesInstanceKeyGroupsGet?) : RequestConfig<Unit> {
+    fun getAllGroupsRequestConfig(instanceKey: kotlin.String, includeParticipants: IncludeParticipants_getAllGroups?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -278,237 +430,6 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * enum for parameter announce
-     */
-     enum class Announce_instancesInstanceKeyGroupsGroupIdAnnouncePut(val value: kotlin.Boolean) {
-         @Json(name = ""true"") `true`("true"),
-         @Json(name = ""false"") `false`("false")
-     }
-
-    /**
-     * Set group announce.
-     * Set if non-admins are allowed to send messages in groups
-     * @param instanceKey Instance key
-     * @param announce Announce status (default to false)
-     * @param groupId Group id of the group
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdAnnouncePut(instanceKey: kotlin.String, announce: Announce_instancesInstanceKeyGroupsGroupIdAnnouncePut = Announce_instancesInstanceKeyGroupsGroupIdAnnouncePut.false, groupId: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdAnnouncePutWithHttpInfo(instanceKey = instanceKey, announce = announce, groupId = groupId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Set group announce.
-     * Set if non-admins are allowed to send messages in groups
-     * @param instanceKey Instance key
-     * @param announce Announce status (default to false)
-     * @param groupId Group id of the group
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdAnnouncePutWithHttpInfo(instanceKey: kotlin.String, announce: Announce_instancesInstanceKeyGroupsGroupIdAnnouncePut, groupId: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdAnnouncePutRequestConfig(instanceKey = instanceKey, announce = announce, groupId = groupId)
-
-        return request<Unit, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdAnnouncePut
-     *
-     * @param instanceKey Instance key
-     * @param announce Announce status (default to false)
-     * @param groupId Group id of the group
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdAnnouncePutRequestConfig(instanceKey: kotlin.String, announce: Announce_instancesInstanceKeyGroupsGroupIdAnnouncePut, groupId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/groups/{group_id}/announce".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"announce"+"}", encodeURIComponent(announce.value.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * Leaves the group.
-     * Leaves the specified group.
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdDelete(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdDeleteWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Leaves the group.
-     * Leaves the specified group.
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdDeleteWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdDeleteRequestConfig(instanceKey = instanceKey, groupId = groupId)
-
-        return request<Unit, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdDelete
-     *
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdDeleteRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/instances/{instance_key}/groups/{group_id}/".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * Set group description.
-     * Changes the group description
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group description data
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdDescriptionPut(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateDescriptionPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdDescriptionPutWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Set group description.
-     * Changes the group description
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group description data
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdDescriptionPutWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateDescriptionPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdDescriptionPutRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return request<GroupUpdateDescriptionPayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdDescriptionPut
-     *
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group description data
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdDescriptionPutRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateDescriptionPayload) : RequestConfig<GroupUpdateDescriptionPayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/groups/{group_id}/description".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Get group.
      * Fetches the group data.
      * @param instanceKey Instance key
@@ -522,8 +443,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdGet(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdGetWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
+    fun getGroup(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
+        val localVarResponse = getGroupWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -551,8 +472,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdGetWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdGetRequestConfig(instanceKey = instanceKey, groupId = groupId)
+    fun getGroupWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getGroupRequestConfig(instanceKey = instanceKey, groupId = groupId)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -560,13 +481,13 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdGet
+     * To obtain the request config of the operation getGroup
      *
      * @param instanceKey Instance key
      * @param groupId Group id of the group
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsGroupIdGetRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
+    fun getGroupRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -581,6 +502,81 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
+     * Get group from invite link.
+     * Gets a group info from an invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode}
+     * @param instanceKey Instance key
+     * @param inviteLink The invite link to check
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getGroupFromInviteLink(instanceKey: kotlin.String, inviteLink: kotlin.String) : APIResponse {
+        val localVarResponse = getGroupFromInviteLinkWithHttpInfo(instanceKey = instanceKey, inviteLink = inviteLink)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Get group from invite link.
+     * Gets a group info from an invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode}
+     * @param instanceKey Instance key
+     * @param inviteLink The invite link to check
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getGroupFromInviteLinkWithHttpInfo(instanceKey: kotlin.String, inviteLink: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getGroupFromInviteLinkRequestConfig(instanceKey = instanceKey, inviteLink = inviteLink)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getGroupFromInviteLink
+     *
+     * @param instanceKey Instance key
+     * @param inviteLink The invite link to check
+     * @return RequestConfig
+     */
+    fun getGroupFromInviteLinkRequestConfig(instanceKey: kotlin.String, inviteLink: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("invite_link", listOf(inviteLink.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/instances/{instance_key}/groups/invite-info".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Get group invite code.
      * Gets the invite code of the group.
      * @param instanceKey Instance key
@@ -594,8 +590,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdInviteCodeGet(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdInviteCodeGetWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
+    fun getGroupInviteCode(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
+        val localVarResponse = getGroupInviteCodeWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -623,8 +619,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdInviteCodeGetWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdInviteCodeGetRequestConfig(instanceKey = instanceKey, groupId = groupId)
+    fun getGroupInviteCodeWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getGroupInviteCodeRequestConfig(instanceKey = instanceKey, groupId = groupId)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -632,13 +628,13 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdInviteCodeGet
+     * To obtain the request config of the operation getGroupInviteCode
      *
      * @param instanceKey Instance key
      * @param groupId Group id of the group
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsGroupIdInviteCodeGetRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
+    fun getGroupInviteCodeRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -653,18 +649,9 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * enum for parameter locked
-     */
-     enum class Locked_instancesInstanceKeyGroupsGroupIdLockPut(val value: kotlin.Boolean) {
-         @Json(name = ""true"") `true`("true"),
-         @Json(name = ""false"") `false`("false")
-     }
-
-    /**
-     * Set group locked.
-     * Set if non-admins are allowed to change the group dp and other stuff
+     * Leaves the group.
+     * Leaves the specified group.
      * @param instanceKey Instance key
-     * @param locked Locked status (default to false)
      * @param groupId Group id of the group
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -675,8 +662,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdLockPut(instanceKey: kotlin.String, locked: Locked_instancesInstanceKeyGroupsGroupIdLockPut = Locked_instancesInstanceKeyGroupsGroupIdLockPut.false, groupId: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdLockPutWithHttpInfo(instanceKey = instanceKey, locked = locked, groupId = groupId)
+    fun leaveGroup(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
+        val localVarResponse = leaveGroupWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -694,10 +681,9 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * Set group locked.
-     * Set if non-admins are allowed to change the group dp and other stuff
+     * Leaves the group.
+     * Leaves the specified group.
      * @param instanceKey Instance key
-     * @param locked Locked status (default to false)
      * @param groupId Group id of the group
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -705,8 +691,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdLockPutWithHttpInfo(instanceKey: kotlin.String, locked: Locked_instancesInstanceKeyGroupsGroupIdLockPut, groupId: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdLockPutRequestConfig(instanceKey = instanceKey, locked = locked, groupId = groupId)
+    fun leaveGroupWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = leaveGroupRequestConfig(instanceKey = instanceKey, groupId = groupId)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -714,249 +700,20 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdLockPut
+     * To obtain the request config of the operation leaveGroup
      *
      * @param instanceKey Instance key
-     * @param locked Locked status (default to false)
      * @param groupId Group id of the group
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsGroupIdLockPutRequestConfig(instanceKey: kotlin.String, locked: Locked_instancesInstanceKeyGroupsGroupIdLockPut, groupId: kotlin.String) : RequestConfig<Unit> {
+    fun leaveGroupRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/groups/{group_id}/lock".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"locked"+"}", encodeURIComponent(locked.value.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * Set group name.
-     * Changes the group name. The max limit is 22 chars
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group name data
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdNamePut(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateNamePayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdNamePutWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Set group name.
-     * Changes the group name. The max limit is 22 chars
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group name data
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdNamePutWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateNamePayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdNamePutRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return request<GroupUpdateNamePayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdNamePut
-     *
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group name data
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdNamePutRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateNamePayload) : RequestConfig<GroupUpdateNamePayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/groups/{group_id}/name".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * Add participant.
-     * Handles adding participants to a group. You must be admin in the group or the query will fail.
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group update payload
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsAddPost(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Add participant.
-     * Handles adding participants to a group. You must be admin in the group or the query will fail.
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group update payload
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdParticipantsAddPostRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return request<GroupUpdateParticipantsPayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdParticipantsAddPost
-     *
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group update payload
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdParticipantsAddPostRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/instances/{instance_key}/groups/{group_id}/participants/add".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * Demote participant.
-     * Demotes admins in groups. You must be admin in the group or the query will fail.
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group update payload
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsDemotePut(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Demote participant.
-     * Demotes admins in groups. You must be admin in the group or the query will fail.
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group update payload
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdParticipantsDemotePutRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
-
-        return request<GroupUpdateParticipantsPayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdParticipantsDemotePut
-     *
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param `data` Group update payload
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdParticipantsDemotePutRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/groups/{group_id}/participants/demote".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            method = RequestMethod.DELETE,
+            path = "/instances/{instance_key}/groups/{group_id}/".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -978,8 +735,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsPromotePut(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+    fun promoteParticipant(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
+        val localVarResponse = promoteParticipantWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -1008,8 +765,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdParticipantsPromotePutRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+    fun promoteParticipantWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = promoteParticipantRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
 
         return request<GroupUpdateParticipantsPayload, APIResponse>(
             localVariableConfig
@@ -1017,14 +774,14 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdParticipantsPromotePut
+     * To obtain the request config of the operation promoteParticipant
      *
      * @param instanceKey Instance key
      * @param groupId Group id of the group
      * @param `data` Group update payload
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsGroupIdParticipantsPromotePutRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
+    fun promoteParticipantRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1054,8 +811,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+    fun removeParticipant(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : APIResponse {
+        val localVarResponse = removeParticipantWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -1084,8 +841,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+    fun removeParticipantWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = removeParticipantRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
 
         return request<GroupUpdateParticipantsPayload, APIResponse>(
             localVariableConfig
@@ -1093,14 +850,14 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete
+     * To obtain the request config of the operation removeParticipant
      *
      * @param instanceKey Instance key
      * @param groupId Group id of the group
      * @param `data` Group update payload
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
+    fun removeParticipantRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateParticipantsPayload) : RequestConfig<GroupUpdateParticipantsPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1116,11 +873,19 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * Set group picture.
-     * Changes the group profile picture. Currently it only seems to accept JPEG images only
+     * enum for parameter announce
+     */
+     enum class Announce_setGroupAnnounce(val value: kotlin.Boolean) {
+         @Json(name = ""true"") `true`("true"),
+         @Json(name = ""false"") `false`("false")
+     }
+
+    /**
+     * Set group announce.
+     * Set if non-admins are allowed to send messages in groups
      * @param instanceKey Instance key
+     * @param announce Announce status (default to false)
      * @param groupId Group id of the group
-     * @param instancesInstanceKeyGroupsGroupIdProfilePicPutRequest 
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1130,8 +895,8 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsGroupIdProfilePicPut(instanceKey: kotlin.String, groupId: kotlin.String, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsGroupIdProfilePicPutWithHttpInfo(instanceKey = instanceKey, groupId = groupId, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest = instancesInstanceKeyGroupsGroupIdProfilePicPutRequest)
+    fun setGroupAnnounce(instanceKey: kotlin.String, announce: Announce_setGroupAnnounce = Announce_setGroupAnnounce.false, groupId: kotlin.String) : APIResponse {
+        val localVarResponse = setGroupAnnounceWithHttpInfo(instanceKey = instanceKey, announce = announce, groupId = groupId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -1149,93 +914,19 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * Set group picture.
-     * Changes the group profile picture. Currently it only seems to accept JPEG images only
+     * Set group announce.
+     * Set if non-admins are allowed to send messages in groups
      * @param instanceKey Instance key
+     * @param announce Announce status (default to false)
      * @param groupId Group id of the group
-     * @param instancesInstanceKeyGroupsGroupIdProfilePicPutRequest 
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsGroupIdProfilePicPutWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsGroupIdProfilePicPutRequestConfig(instanceKey = instanceKey, groupId = groupId, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest = instancesInstanceKeyGroupsGroupIdProfilePicPutRequest)
-
-        return request<InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsGroupIdProfilePicPut
-     *
-     * @param instanceKey Instance key
-     * @param groupId Group id of the group
-     * @param instancesInstanceKeyGroupsGroupIdProfilePicPutRequest 
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyGroupsGroupIdProfilePicPutRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest) : RequestConfig<InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest> {
-        val localVariableBody = instancesInstanceKeyGroupsGroupIdProfilePicPutRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/groups/{group_id}/profile-pic".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * Get group from invite link.
-     * Gets a group info from an invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode}
-     * @param instanceKey Instance key
-     * @param inviteLink The invite link to check
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGroupsInviteInfoGet(instanceKey: kotlin.String, inviteLink: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGroupsInviteInfoGetWithHttpInfo(instanceKey = instanceKey, inviteLink = inviteLink)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Get group from invite link.
-     * Gets a group info from an invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode}
-     * @param instanceKey Instance key
-     * @param inviteLink The invite link to check
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGroupsInviteInfoGetWithHttpInfo(instanceKey: kotlin.String, inviteLink: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGroupsInviteInfoGetRequestConfig(instanceKey = instanceKey, inviteLink = inviteLink)
+    fun setGroupAnnounceWithHttpInfo(instanceKey: kotlin.String, announce: Announce_setGroupAnnounce, groupId: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = setGroupAnnounceRequestConfig(instanceKey = instanceKey, announce = announce, groupId = groupId)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -1243,23 +934,332 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGroupsInviteInfoGet
+     * To obtain the request config of the operation setGroupAnnounce
      *
      * @param instanceKey Instance key
-     * @param inviteLink The invite link to check
+     * @param announce Announce status (default to false)
+     * @param groupId Group id of the group
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGroupsInviteInfoGetRequestConfig(instanceKey: kotlin.String, inviteLink: kotlin.String) : RequestConfig<Unit> {
+    fun setGroupAnnounceRequestConfig(instanceKey: kotlin.String, announce: Announce_setGroupAnnounce, groupId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("invite_link", listOf(inviteLink.toString()))
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/instances/{instance_key}/groups/invite-info".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/groups/{group_id}/announce".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"announce"+"}", encodeURIComponent(announce.value.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Set group description.
+     * Changes the group description
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group description data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun setGroupDescription(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateDescriptionPayload) : APIResponse {
+        val localVarResponse = setGroupDescriptionWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Set group description.
+     * Changes the group description
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group description data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setGroupDescriptionWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateDescriptionPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = setGroupDescriptionRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+
+        return request<GroupUpdateDescriptionPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setGroupDescription
+     *
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group description data
+     * @return RequestConfig
+     */
+    fun setGroupDescriptionRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateDescriptionPayload) : RequestConfig<GroupUpdateDescriptionPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/groups/{group_id}/description".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter locked
+     */
+     enum class Locked_setGroupLocked(val value: kotlin.Boolean) {
+         @Json(name = ""true"") `true`("true"),
+         @Json(name = ""false"") `false`("false")
+     }
+
+    /**
+     * Set group locked.
+     * Set if non-admins are allowed to change the group dp and other stuff
+     * @param instanceKey Instance key
+     * @param locked Locked status (default to false)
+     * @param groupId Group id of the group
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun setGroupLocked(instanceKey: kotlin.String, locked: Locked_setGroupLocked = Locked_setGroupLocked.false, groupId: kotlin.String) : APIResponse {
+        val localVarResponse = setGroupLockedWithHttpInfo(instanceKey = instanceKey, locked = locked, groupId = groupId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Set group locked.
+     * Set if non-admins are allowed to change the group dp and other stuff
+     * @param instanceKey Instance key
+     * @param locked Locked status (default to false)
+     * @param groupId Group id of the group
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setGroupLockedWithHttpInfo(instanceKey: kotlin.String, locked: Locked_setGroupLocked, groupId: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = setGroupLockedRequestConfig(instanceKey = instanceKey, locked = locked, groupId = groupId)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setGroupLocked
+     *
+     * @param instanceKey Instance key
+     * @param locked Locked status (default to false)
+     * @param groupId Group id of the group
+     * @return RequestConfig
+     */
+    fun setGroupLockedRequestConfig(instanceKey: kotlin.String, locked: Locked_setGroupLocked, groupId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/groups/{group_id}/lock".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"locked"+"}", encodeURIComponent(locked.value.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Set group name.
+     * Changes the group name. The max limit is 22 chars
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group name data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun setGroupName(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateNamePayload) : APIResponse {
+        val localVarResponse = setGroupNameWithHttpInfo(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Set group name.
+     * Changes the group name. The max limit is 22 chars
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group name data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setGroupNameWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateNamePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = setGroupNameRequestConfig(instanceKey = instanceKey, groupId = groupId, `data` = `data`)
+
+        return request<GroupUpdateNamePayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setGroupName
+     *
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param `data` Group name data
+     * @return RequestConfig
+     */
+    fun setGroupNameRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, `data`: GroupUpdateNamePayload) : RequestConfig<GroupUpdateNamePayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/groups/{group_id}/name".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Set group picture.
+     * Changes the group profile picture. Currently it only seems to accept JPEG images only
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param setGroupPictureRequest 
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun setGroupPicture(instanceKey: kotlin.String, groupId: kotlin.String, setGroupPictureRequest: SetGroupPictureRequest) : APIResponse {
+        val localVarResponse = setGroupPictureWithHttpInfo(instanceKey = instanceKey, groupId = groupId, setGroupPictureRequest = setGroupPictureRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Set group picture.
+     * Changes the group profile picture. Currently it only seems to accept JPEG images only
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param setGroupPictureRequest 
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setGroupPictureWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String, setGroupPictureRequest: SetGroupPictureRequest) : ApiResponse<APIResponse?> {
+        val localVariableConfig = setGroupPictureRequestConfig(instanceKey = instanceKey, groupId = groupId, setGroupPictureRequest = setGroupPictureRequest)
+
+        return request<SetGroupPictureRequest, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setGroupPicture
+     *
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @param setGroupPictureRequest 
+     * @return RequestConfig
+     */
+    fun setGroupPictureRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String, setGroupPictureRequest: SetGroupPictureRequest) : RequestConfig<SetGroupPictureRequest> {
+        val localVariableBody = setGroupPictureRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/groups/{group_id}/profile-pic".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

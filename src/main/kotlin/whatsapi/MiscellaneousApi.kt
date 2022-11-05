@@ -60,8 +60,8 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyMiscProfilePicGet(instanceKey: kotlin.String, jid: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyMiscProfilePicGetWithHttpInfo(instanceKey = instanceKey, jid = jid)
+    fun getProfilePic(instanceKey: kotlin.String, jid: kotlin.String) : APIResponse {
+        val localVarResponse = getProfilePicWithHttpInfo(instanceKey = instanceKey, jid = jid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -89,8 +89,8 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyMiscProfilePicGetWithHttpInfo(instanceKey: kotlin.String, jid: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyMiscProfilePicGetRequestConfig(instanceKey = instanceKey, jid = jid)
+    fun getProfilePicWithHttpInfo(instanceKey: kotlin.String, jid: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getProfilePicRequestConfig(instanceKey = instanceKey, jid = jid)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -98,13 +98,13 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyMiscProfilePicGet
+     * To obtain the request config of the operation getProfilePic
      *
      * @param instanceKey Instance key
      * @param jid JID
      * @return RequestConfig
      */
-    fun instancesInstanceKeyMiscProfilePicGetRequestConfig(instanceKey: kotlin.String, jid: kotlin.String) : RequestConfig<Unit> {
+    fun getProfilePicRequestConfig(instanceKey: kotlin.String, jid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -135,8 +135,8 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyMiscUserInfoPost(instanceKey: kotlin.String, `data`: UserInfoPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyMiscUserInfoPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+    fun getUsersInfo(instanceKey: kotlin.String, `data`: UserInfoPayload) : APIResponse {
+        val localVarResponse = getUsersInfoWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -164,8 +164,8 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyMiscUserInfoPostWithHttpInfo(instanceKey: kotlin.String, `data`: UserInfoPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyMiscUserInfoPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
+    fun getUsersInfoWithHttpInfo(instanceKey: kotlin.String, `data`: UserInfoPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getUsersInfoRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
         return request<UserInfoPayload, APIResponse>(
             localVariableConfig
@@ -173,13 +173,13 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyMiscUserInfoPost
+     * To obtain the request config of the operation getUsersInfo
      *
      * @param instanceKey Instance key
      * @param `data` Data
      * @return RequestConfig
      */
-    fun instancesInstanceKeyMiscUserInfoPostRequestConfig(instanceKey: kotlin.String, `data`: UserInfoPayload) : RequestConfig<UserInfoPayload> {
+    fun getUsersInfoRequestConfig(instanceKey: kotlin.String, `data`: UserInfoPayload) : RequestConfig<UserInfoPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

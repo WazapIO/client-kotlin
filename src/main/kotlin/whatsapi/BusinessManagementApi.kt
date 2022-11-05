@@ -58,8 +58,8 @@ class BusinessManagementApi(basePath: kotlin.String = defaultBasePath, client: O
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyBusinessCatalogGet(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyBusinessCatalogGetWithHttpInfo(instanceKey = instanceKey)
+    fun fetchCatlog(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = fetchCatlogWithHttpInfo(instanceKey = instanceKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -86,8 +86,8 @@ class BusinessManagementApi(basePath: kotlin.String = defaultBasePath, client: O
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyBusinessCatalogGetWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyBusinessCatalogGetRequestConfig(instanceKey = instanceKey)
+    fun fetchCatlogWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = fetchCatlogRequestConfig(instanceKey = instanceKey)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -95,12 +95,12 @@ class BusinessManagementApi(basePath: kotlin.String = defaultBasePath, client: O
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyBusinessCatalogGet
+     * To obtain the request config of the operation fetchCatlog
      *
      * @param instanceKey Instance key
      * @return RequestConfig
      */
-    fun instancesInstanceKeyBusinessCatalogGetRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+    fun fetchCatlogRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

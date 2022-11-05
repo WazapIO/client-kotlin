@@ -4,319 +4,19 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesCreateGet**](InstanceApi.md#instancesCreateGet) | **GET** /instances/create | Creates a new instance key.
-[**instancesInstanceKeyContactsGet**](InstanceApi.md#instancesInstanceKeyContactsGet) | **GET** /instances/{instance_key}/contacts | Get contacts.
-[**instancesInstanceKeyDeleteDelete**](InstanceApi.md#instancesInstanceKeyDeleteDelete) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
-[**instancesInstanceKeyGet**](InstanceApi.md#instancesInstanceKeyGet) | **GET** /instances/{instance_key}/ | Get Instance.
-[**instancesInstanceKeyLogoutDelete**](InstanceApi.md#instancesInstanceKeyLogoutDelete) | **DELETE** /instances/{instance_key}/logout | Logout Instance.
-[**instancesInstanceKeyQrcodeGet**](InstanceApi.md#instancesInstanceKeyQrcodeGet) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
-[**instancesInstanceKeyWebhookPut**](InstanceApi.md#instancesInstanceKeyWebhookPut) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
-[**instancesListGet**](InstanceApi.md#instancesListGet) | **GET** /instances/list | Get all instances.
-
-
-<a name="instancesCreateGet"></a>
-# **instancesCreateGet**
-> APIResponse instancesCreateGet(instanceKey)
-
-Creates a new instance key.
-
-This endpoint is used to create a new WhatsApp Web instance.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Insert instance key if you want to provide custom key
-try {
-    val result : APIResponse = apiInstance.instancesCreateGet(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesCreateGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesCreateGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Insert instance key if you want to provide custom key | [optional]
-
-### Return type
-
-[**APIResponse**](APIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="instancesInstanceKeyContactsGet"></a>
-# **instancesInstanceKeyContactsGet**
-> APIResponse instancesInstanceKeyContactsGet(instanceKey)
-
-Get contacts.
-
-Fetches the list of contacts in the instance.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyContactsGet(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesInstanceKeyContactsGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesInstanceKeyContactsGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Instance key |
-
-### Return type
-
-[**APIResponse**](APIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="instancesInstanceKeyDeleteDelete"></a>
-# **instancesInstanceKeyDeleteDelete**
-> APIResponse instancesInstanceKeyDeleteDelete(instanceKey)
-
-Delete Instance.
-
-Deletes the instance with the provided key.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyDeleteDelete(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesInstanceKeyDeleteDelete")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesInstanceKeyDeleteDelete")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Instance key |
-
-### Return type
-
-[**APIResponse**](APIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="instancesInstanceKeyGet"></a>
-# **instancesInstanceKeyGet**
-> APIResponse instancesInstanceKeyGet(instanceKey)
-
-Get Instance.
-
-Returns the instance data of single instance with connection status.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyGet(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesInstanceKeyGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesInstanceKeyGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Instance key |
-
-### Return type
-
-[**APIResponse**](APIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="instancesInstanceKeyLogoutDelete"></a>
-# **instancesInstanceKeyLogoutDelete**
-> APIResponse instancesInstanceKeyLogoutDelete(instanceKey)
-
-Logout Instance.
-
-Logouts of the instance with the provided key.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyLogoutDelete(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesInstanceKeyLogoutDelete")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesInstanceKeyLogoutDelete")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Instance key |
-
-### Return type
-
-[**APIResponse**](APIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="instancesInstanceKeyQrcodeGet"></a>
-# **instancesInstanceKeyQrcodeGet**
-> APIResponse instancesInstanceKeyQrcodeGet(instanceKey)
-
-Get QrCode.
-
-Returns the qrcode in the base64 format.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyQrcodeGet(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesInstanceKeyQrcodeGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesInstanceKeyQrcodeGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Instance key |
-
-### Return type
-
-[**APIResponse**](APIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="instancesInstanceKeyWebhookPut"></a>
-# **instancesInstanceKeyWebhookPut**
-> APIResponse instancesInstanceKeyWebhookPut(instanceKey, `data`)
+[**changeWebhookUrl**](InstanceApi.md#changeWebhookUrl) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
+[**createInstance**](InstanceApi.md#createInstance) | **GET** /instances/create | Creates a new instance key.
+[**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
+[**getContacts**](InstanceApi.md#getContacts) | **GET** /instances/{instance_key}/contacts | Get contacts.
+[**getInstance**](InstanceApi.md#getInstance) | **GET** /instances/{instance_key}/ | Get Instance.
+[**getQrCode**](InstanceApi.md#getQrCode) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
+[**listInstances**](InstanceApi.md#listInstances) | **GET** /instances/list | Get all instances.
+[**logoutInstance**](InstanceApi.md#logoutInstance) | **DELETE** /instances/{instance_key}/logout | Logout Instance.
+
+
+<a name="changeWebhookUrl"></a>
+# **changeWebhookUrl**
+> APIResponse changeWebhookUrl(instanceKey, `data`)
 
 Change Webhook url.
 
@@ -332,13 +32,13 @@ val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val `data` : WebhookPayload =  // WebhookPayload | Message data
 try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyWebhookPut(instanceKey, `data`)
+    val result : APIResponse = apiInstance.changeWebhookUrl(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesInstanceKeyWebhookPut")
+    println("4xx response calling InstanceApi#changeWebhookUrl")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesInstanceKeyWebhookPut")
+    println("5xx response calling InstanceApi#changeWebhookUrl")
     e.printStackTrace()
 }
 ```
@@ -366,9 +66,259 @@ Configure ApiKeyAuth:
  - **Content-Type**: application/json
  - **Accept**: Not defined
 
-<a name="instancesListGet"></a>
-# **instancesListGet**
-> APIResponse instancesListGet()
+<a name="createInstance"></a>
+# **createInstance**
+> APIResponse createInstance(instanceKey)
+
+Creates a new instance key.
+
+This endpoint is used to create a new WhatsApp Web instance.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = InstanceApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Insert instance key if you want to provide custom key
+try {
+    val result : APIResponse = apiInstance.createInstance(instanceKey)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling InstanceApi#createInstance")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling InstanceApi#createInstance")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Insert instance key if you want to provide custom key | [optional]
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="deleteInstance"></a>
+# **deleteInstance**
+> APIResponse deleteInstance(instanceKey)
+
+Delete Instance.
+
+Deletes the instance with the provided key.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = InstanceApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+try {
+    val result : APIResponse = apiInstance.deleteInstance(instanceKey)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling InstanceApi#deleteInstance")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling InstanceApi#deleteInstance")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="getContacts"></a>
+# **getContacts**
+> APIResponse getContacts(instanceKey)
+
+Get contacts.
+
+Fetches the list of contacts in the instance.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = InstanceApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+try {
+    val result : APIResponse = apiInstance.getContacts(instanceKey)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling InstanceApi#getContacts")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling InstanceApi#getContacts")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="getInstance"></a>
+# **getInstance**
+> APIResponse getInstance(instanceKey)
+
+Get Instance.
+
+Returns the instance data of single instance with connection status.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = InstanceApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+try {
+    val result : APIResponse = apiInstance.getInstance(instanceKey)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling InstanceApi#getInstance")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling InstanceApi#getInstance")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="getQrCode"></a>
+# **getQrCode**
+> APIResponse getQrCode(instanceKey)
+
+Get QrCode.
+
+Returns the qrcode in the base64 format.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = InstanceApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+try {
+    val result : APIResponse = apiInstance.getQrCode(instanceKey)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling InstanceApi#getQrCode")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling InstanceApi#getQrCode")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="listInstances"></a>
+# **listInstances**
+> APIResponse listInstances()
 
 Get all instances.
 
@@ -382,19 +332,69 @@ Fetches the list of all Instances with login status.
 
 val apiInstance = InstanceApi()
 try {
-    val result : APIResponse = apiInstance.instancesListGet()
+    val result : APIResponse = apiInstance.listInstances()
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling InstanceApi#instancesListGet")
+    println("4xx response calling InstanceApi#listInstances")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling InstanceApi#instancesListGet")
+    println("5xx response calling InstanceApi#listInstances")
     e.printStackTrace()
 }
 ```
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="logoutInstance"></a>
+# **logoutInstance**
+> APIResponse logoutInstance(instanceKey)
+
+Logout Instance.
+
+Logouts of the instance with the provided key.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = InstanceApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+try {
+    val result : APIResponse = apiInstance.logoutInstance(instanceKey)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling InstanceApi#logoutInstance")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling InstanceApi#logoutInstance")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
 
 ### Return type
 

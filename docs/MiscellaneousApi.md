@@ -4,13 +4,13 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesInstanceKeyMiscProfilePicGet**](MiscellaneousApi.md#instancesInstanceKeyMiscProfilePicGet) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
-[**instancesInstanceKeyMiscUserInfoPost**](MiscellaneousApi.md#instancesInstanceKeyMiscUserInfoPost) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
+[**getProfilePic**](MiscellaneousApi.md#getProfilePic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
+[**getUsersInfo**](MiscellaneousApi.md#getUsersInfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
 
 
-<a name="instancesInstanceKeyMiscProfilePicGet"></a>
-# **instancesInstanceKeyMiscProfilePicGet**
-> APIResponse instancesInstanceKeyMiscProfilePicGet(instanceKey, jid)
+<a name="getProfilePic"></a>
+# **getProfilePic**
+> APIResponse getProfilePic(instanceKey, jid)
 
 Get profile pic.
 
@@ -26,13 +26,13 @@ val apiInstance = MiscellaneousApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val jid : kotlin.String = jid_example // kotlin.String | JID
 try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyMiscProfilePicGet(instanceKey, jid)
+    val result : APIResponse = apiInstance.getProfilePic(instanceKey, jid)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling MiscellaneousApi#instancesInstanceKeyMiscProfilePicGet")
+    println("4xx response calling MiscellaneousApi#getProfilePic")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling MiscellaneousApi#instancesInstanceKeyMiscProfilePicGet")
+    println("5xx response calling MiscellaneousApi#getProfilePic")
     e.printStackTrace()
 }
 ```
@@ -60,9 +60,9 @@ Configure ApiKeyAuth:
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a name="instancesInstanceKeyMiscUserInfoPost"></a>
-# **instancesInstanceKeyMiscUserInfoPost**
-> APIResponse instancesInstanceKeyMiscUserInfoPost(instanceKey, `data`)
+<a name="getUsersInfo"></a>
+# **getUsersInfo**
+> APIResponse getUsersInfo(instanceKey, `data`)
 
 Fetches the users info.
 
@@ -78,13 +78,13 @@ val apiInstance = MiscellaneousApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val `data` : UserInfoPayload =  // UserInfoPayload | Data
 try {
-    val result : APIResponse = apiInstance.instancesInstanceKeyMiscUserInfoPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.getUsersInfo(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling MiscellaneousApi#instancesInstanceKeyMiscUserInfoPost")
+    println("4xx response calling MiscellaneousApi#getUsersInfo")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling MiscellaneousApi#instancesInstanceKeyMiscUserInfoPost")
+    println("5xx response calling MiscellaneousApi#getUsersInfo")
     e.printStackTrace()
 }
 ```

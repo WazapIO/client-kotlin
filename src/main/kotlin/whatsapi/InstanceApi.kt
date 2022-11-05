@@ -47,6 +47,79 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
+     * Change Webhook url.
+     * Changes the webhook url of an instance.
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun changeWebhookUrl(instanceKey: kotlin.String, `data`: WebhookPayload) : APIResponse {
+        val localVarResponse = changeWebhookUrlWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Change Webhook url.
+     * Changes the webhook url of an instance.
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun changeWebhookUrlWithHttpInfo(instanceKey: kotlin.String, `data`: WebhookPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = changeWebhookUrlRequestConfig(instanceKey = instanceKey, `data` = `data`)
+
+        return request<WebhookPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation changeWebhookUrl
+     *
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return RequestConfig
+     */
+    fun changeWebhookUrlRequestConfig(instanceKey: kotlin.String, `data`: WebhookPayload) : RequestConfig<WebhookPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/webhook".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Creates a new instance key.
      * This endpoint is used to create a new WhatsApp Web instance.
      * @param instanceKey Insert instance key if you want to provide custom key (optional)
@@ -59,8 +132,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesCreateGet(instanceKey: kotlin.String? = null) : APIResponse {
-        val localVarResponse = instancesCreateGetWithHttpInfo(instanceKey = instanceKey)
+    fun createInstance(instanceKey: kotlin.String? = null) : APIResponse {
+        val localVarResponse = createInstanceWithHttpInfo(instanceKey = instanceKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -87,8 +160,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesCreateGetWithHttpInfo(instanceKey: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesCreateGetRequestConfig(instanceKey = instanceKey)
+    fun createInstanceWithHttpInfo(instanceKey: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = createInstanceRequestConfig(instanceKey = instanceKey)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -96,12 +169,12 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * To obtain the request config of the operation instancesCreateGet
+     * To obtain the request config of the operation createInstance
      *
      * @param instanceKey Insert instance key if you want to provide custom key (optional)
      * @return RequestConfig
      */
-    fun instancesCreateGetRequestConfig(instanceKey: kotlin.String?) : RequestConfig<Unit> {
+    fun createInstanceRequestConfig(instanceKey: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -121,75 +194,6 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * Get contacts.
-     * Fetches the list of contacts in the instance.
-     * @param instanceKey Instance key
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyContactsGet(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyContactsGetWithHttpInfo(instanceKey = instanceKey)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Get contacts.
-     * Fetches the list of contacts in the instance.
-     * @param instanceKey Instance key
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyContactsGetWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyContactsGetRequestConfig(instanceKey = instanceKey)
-
-        return request<Unit, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyContactsGet
-     *
-     * @param instanceKey Instance key
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyContactsGetRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/instances/{instance_key}/contacts".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Delete Instance.
      * Deletes the instance with the provided key.
      * @param instanceKey Instance key
@@ -202,8 +206,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyDeleteDelete(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyDeleteDeleteWithHttpInfo(instanceKey = instanceKey)
+    fun deleteInstance(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = deleteInstanceWithHttpInfo(instanceKey = instanceKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -230,8 +234,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyDeleteDeleteWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyDeleteDeleteRequestConfig(instanceKey = instanceKey)
+    fun deleteInstanceWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = deleteInstanceRequestConfig(instanceKey = instanceKey)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -239,12 +243,12 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyDeleteDelete
+     * To obtain the request config of the operation deleteInstance
      *
      * @param instanceKey Instance key
      * @return RequestConfig
      */
-    fun instancesInstanceKeyDeleteDeleteRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+    fun deleteInstanceRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -259,6 +263,75 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
+     * Get contacts.
+     * Fetches the list of contacts in the instance.
+     * @param instanceKey Instance key
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getContacts(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = getContactsWithHttpInfo(instanceKey = instanceKey)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Get contacts.
+     * Fetches the list of contacts in the instance.
+     * @param instanceKey Instance key
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getContactsWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getContactsRequestConfig(instanceKey = instanceKey)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getContacts
+     *
+     * @param instanceKey Instance key
+     * @return RequestConfig
+     */
+    fun getContactsRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/instances/{instance_key}/contacts".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Get Instance.
      * Returns the instance data of single instance with connection status.
      * @param instanceKey Instance key
@@ -271,8 +344,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyGet(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyGetWithHttpInfo(instanceKey = instanceKey)
+    fun getInstance(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = getInstanceWithHttpInfo(instanceKey = instanceKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -299,8 +372,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyGetWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyGetRequestConfig(instanceKey = instanceKey)
+    fun getInstanceWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getInstanceRequestConfig(instanceKey = instanceKey)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -308,12 +381,12 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyGet
+     * To obtain the request config of the operation getInstance
      *
      * @param instanceKey Instance key
      * @return RequestConfig
      */
-    fun instancesInstanceKeyGetRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+    fun getInstanceRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,75 +401,6 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * Logout Instance.
-     * Logouts of the instance with the provided key.
-     * @param instanceKey Instance key
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyLogoutDelete(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyLogoutDeleteWithHttpInfo(instanceKey = instanceKey)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Logout Instance.
-     * Logouts of the instance with the provided key.
-     * @param instanceKey Instance key
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyLogoutDeleteWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyLogoutDeleteRequestConfig(instanceKey = instanceKey)
-
-        return request<Unit, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyLogoutDelete
-     *
-     * @param instanceKey Instance key
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyLogoutDeleteRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/instances/{instance_key}/logout".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Get QrCode.
      * Returns the qrcode in the base64 format.
      * @param instanceKey Instance key
@@ -409,8 +413,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyQrcodeGet(instanceKey: kotlin.String) : APIResponse {
-        val localVarResponse = instancesInstanceKeyQrcodeGetWithHttpInfo(instanceKey = instanceKey)
+    fun getQrCode(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = getQrCodeWithHttpInfo(instanceKey = instanceKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -437,8 +441,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyQrcodeGetWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyQrcodeGetRequestConfig(instanceKey = instanceKey)
+    fun getQrCodeWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getQrCodeRequestConfig(instanceKey = instanceKey)
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -446,12 +450,12 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * To obtain the request config of the operation instancesInstanceKeyQrcodeGet
+     * To obtain the request config of the operation getQrCode
      *
      * @param instanceKey Instance key
      * @return RequestConfig
      */
-    fun instancesInstanceKeyQrcodeGetRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+    fun getQrCodeRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -466,79 +470,6 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * Change Webhook url.
-     * Changes the webhook url of an instance.
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return APIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyWebhookPut(instanceKey: kotlin.String, `data`: WebhookPayload) : APIResponse {
-        val localVarResponse = instancesInstanceKeyWebhookPutWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Change Webhook url.
-     * Changes the webhook url of an instance.
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return ApiResponse<APIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyWebhookPutWithHttpInfo(instanceKey: kotlin.String, `data`: WebhookPayload) : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesInstanceKeyWebhookPutRequestConfig(instanceKey = instanceKey, `data` = `data`)
-
-        return request<WebhookPayload, APIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyWebhookPut
-     *
-     * @param instanceKey Instance key
-     * @param `data` Message data
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyWebhookPutRequestConfig(instanceKey: kotlin.String, `data`: WebhookPayload) : RequestConfig<WebhookPayload> {
-        val localVariableBody = `data`
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/instances/{instance_key}/webhook".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Get all instances.
      * Fetches the list of all Instances with login status.
      * @return APIResponse
@@ -550,8 +481,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesListGet() : APIResponse {
-        val localVarResponse = instancesListGetWithHttpInfo()
+    fun listInstances() : APIResponse {
+        val localVarResponse = listInstancesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -577,8 +508,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesListGetWithHttpInfo() : ApiResponse<APIResponse?> {
-        val localVariableConfig = instancesListGetRequestConfig()
+    fun listInstancesWithHttpInfo() : ApiResponse<APIResponse?> {
+        val localVariableConfig = listInstancesRequestConfig()
 
         return request<Unit, APIResponse>(
             localVariableConfig
@@ -586,11 +517,11 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     }
 
     /**
-     * To obtain the request config of the operation instancesListGet
+     * To obtain the request config of the operation listInstances
      *
      * @return RequestConfig
      */
-    fun instancesListGetRequestConfig() : RequestConfig<Unit> {
+    fun listInstancesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -598,6 +529,75 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/instances/list",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Logout Instance.
+     * Logouts of the instance with the provided key.
+     * @param instanceKey Instance key
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun logoutInstance(instanceKey: kotlin.String) : APIResponse {
+        val localVarResponse = logoutInstanceWithHttpInfo(instanceKey = instanceKey)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Logout Instance.
+     * Logouts of the instance with the provided key.
+     * @param instanceKey Instance key
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun logoutInstanceWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = logoutInstanceRequestConfig(instanceKey = instanceKey)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation logoutInstance
+     *
+     * @param instanceKey Instance key
+     * @return RequestConfig
+     */
+    fun logoutInstanceRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/instances/{instance_key}/logout".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
