@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 <a name="instancesCreateGet"></a>
 # **instancesCreateGet**
-> MainAPIResponse instancesCreateGet(instanceKey)
+> APIResponse instancesCreateGet(instanceKey)
 
 Creates a new instance key.
 
@@ -31,7 +31,7 @@ This endpoint is used to create a new WhatsApp Web instance.
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Insert instance key if you want to provide custom key
 try {
-    val result : MainAPIResponse = apiInstance.instancesCreateGet(instanceKey)
+    val result : APIResponse = apiInstance.instancesCreateGet(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesCreateGet")
@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -66,7 +66,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyContactsGet"></a>
 # **instancesInstanceKeyContactsGet**
-> MainAPIResponse instancesInstanceKeyContactsGet(instanceKey)
+> APIResponse instancesInstanceKeyContactsGet(instanceKey)
 
 Get contacts.
 
@@ -81,7 +81,7 @@ Fetches the list of contacts in the instance.
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyContactsGet(instanceKey)
+    val result : APIResponse = apiInstance.instancesInstanceKeyContactsGet(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesInstanceKeyContactsGet")
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -116,7 +116,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyDeleteDelete"></a>
 # **instancesInstanceKeyDeleteDelete**
-> MainAPIResponse instancesInstanceKeyDeleteDelete(instanceKey)
+> APIResponse instancesInstanceKeyDeleteDelete(instanceKey)
 
 Delete Instance.
 
@@ -131,7 +131,7 @@ Deletes the instance with the provided key.
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyDeleteDelete(instanceKey)
+    val result : APIResponse = apiInstance.instancesInstanceKeyDeleteDelete(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesInstanceKeyDeleteDelete")
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -166,7 +166,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGet"></a>
 # **instancesInstanceKeyGet**
-> MainAPIResponse instancesInstanceKeyGet(instanceKey)
+> APIResponse instancesInstanceKeyGet(instanceKey)
 
 Get Instance.
 
@@ -181,7 +181,7 @@ Returns the instance data of single instance with connection status.
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGet(instanceKey)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGet(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesInstanceKeyGet")
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyLogoutDelete"></a>
 # **instancesInstanceKeyLogoutDelete**
-> MainAPIResponse instancesInstanceKeyLogoutDelete(instanceKey)
+> APIResponse instancesInstanceKeyLogoutDelete(instanceKey)
 
 Logout Instance.
 
@@ -231,7 +231,7 @@ Logouts of the instance with the provided key.
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyLogoutDelete(instanceKey)
+    val result : APIResponse = apiInstance.instancesInstanceKeyLogoutDelete(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesInstanceKeyLogoutDelete")
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -266,7 +266,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyQrcodeGet"></a>
 # **instancesInstanceKeyQrcodeGet**
-> MainAPIResponse instancesInstanceKeyQrcodeGet(instanceKey)
+> APIResponse instancesInstanceKeyQrcodeGet(instanceKey)
 
 Get QrCode.
 
@@ -281,7 +281,7 @@ Returns the qrcode in the base64 format.
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyQrcodeGet(instanceKey)
+    val result : APIResponse = apiInstance.instancesInstanceKeyQrcodeGet(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesInstanceKeyQrcodeGet")
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -316,7 +316,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyWebhookPut"></a>
 # **instancesInstanceKeyWebhookPut**
-> MainAPIResponse instancesInstanceKeyWebhookPut(instanceKey, `data`)
+> APIResponse instancesInstanceKeyWebhookPut(instanceKey, `data`)
 
 Change Webhook url.
 
@@ -330,9 +330,9 @@ Changes the webhook url of an instance.
 
 val apiInstance = InstanceApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsWebhookPayload =  // StructsWebhookPayload | Message data
+val `data` : WebhookPayload =  // WebhookPayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyWebhookPut(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyWebhookPut(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesInstanceKeyWebhookPut")
@@ -348,11 +348,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsWebhookPayload**](StructsWebhookPayload.md)| Message data |
+ **&#x60;data&#x60;** | [**WebhookPayload**](WebhookPayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -368,7 +368,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesListGet"></a>
 # **instancesListGet**
-> MainAPIResponse instancesListGet()
+> APIResponse instancesListGet()
 
 Get all instances.
 
@@ -382,7 +382,7 @@ Fetches the list of all Instances with login status.
 
 val apiInstance = InstanceApi()
 try {
-    val result : MainAPIResponse = apiInstance.instancesListGet()
+    val result : APIResponse = apiInstance.instancesListGet()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#instancesListGet")
@@ -398,7 +398,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 

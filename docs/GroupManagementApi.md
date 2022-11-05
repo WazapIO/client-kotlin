@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 <a name="instancesInstanceKeyGroupsAdminGet"></a>
 # **instancesInstanceKeyGroupsAdminGet**
-> MainAPIResponse instancesInstanceKeyGroupsAdminGet(instanceKey)
+> APIResponse instancesInstanceKeyGroupsAdminGet(instanceKey)
 
 Get admin groupss.
 
@@ -39,7 +39,7 @@ Returns list of all groups in which you are admin.
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsAdminGet(instanceKey)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsAdminGet(instanceKey)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsAdminGet")
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsCreatePost"></a>
 # **instancesInstanceKeyGroupsCreatePost**
-> MainAPIResponse instancesInstanceKeyGroupsCreatePost(instanceKey, `data`)
+> APIResponse instancesInstanceKeyGroupsCreatePost(instanceKey, `data`)
 
 Create group.
 
@@ -88,9 +88,9 @@ Creates a group with the participant data. The creator is automatically added to
 
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsGroupCreatePayload =  // StructsGroupCreatePayload | Group create payload
+val `data` : GroupCreatePayload =  // GroupCreatePayload | Group create payload
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsCreatePost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsCreatePost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsCreatePost")
@@ -106,11 +106,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsGroupCreatePayload**](StructsGroupCreatePayload.md)| Group create payload |
+ **&#x60;data&#x60;** | [**GroupCreatePayload**](GroupCreatePayload.md)| Group create payload |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -126,7 +126,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGet"></a>
 # **instancesInstanceKeyGroupsGet**
-> MainAPIResponse instancesInstanceKeyGroupsGet(instanceKey, includeParticipants)
+> APIResponse instancesInstanceKeyGroupsGet(instanceKey, includeParticipants)
 
 Get all groups.
 
@@ -142,7 +142,7 @@ val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val includeParticipants : kotlin.String = includeParticipants_example // kotlin.String | Include participants data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGet(instanceKey, includeParticipants)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGet(instanceKey, includeParticipants)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGet")
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -178,7 +178,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdAnnouncePut"></a>
 # **instancesInstanceKeyGroupsGroupIdAnnouncePut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdAnnouncePut(instanceKey, announce, groupId)
+> APIResponse instancesInstanceKeyGroupsGroupIdAnnouncePut(instanceKey, announce, groupId)
 
 Set group announce.
 
@@ -195,7 +195,7 @@ val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instanc
 val announce : kotlin.Boolean = true // kotlin.Boolean | Announce status
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdAnnouncePut(instanceKey, announce, groupId)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdAnnouncePut(instanceKey, announce, groupId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdAnnouncePut")
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -232,7 +232,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdDelete"></a>
 # **instancesInstanceKeyGroupsGroupIdDelete**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdDelete(instanceKey, groupId)
+> APIResponse instancesInstanceKeyGroupsGroupIdDelete(instanceKey, groupId)
 
 Leaves the group.
 
@@ -248,7 +248,7 @@ val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdDelete(instanceKey, groupId)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdDelete(instanceKey, groupId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdDelete")
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -284,7 +284,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdDescriptionPut"></a>
 # **instancesInstanceKeyGroupsGroupIdDescriptionPut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdDescriptionPut(instanceKey, groupId, `data`)
+> APIResponse instancesInstanceKeyGroupsGroupIdDescriptionPut(instanceKey, groupId, `data`)
 
 Set group description.
 
@@ -299,9 +299,9 @@ Changes the group description
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
-val `data` : StructsGroupUpdateDescriptionPayload =  // StructsGroupUpdateDescriptionPayload | Group description data
+val `data` : GroupUpdateDescriptionPayload =  // GroupUpdateDescriptionPayload | Group description data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdDescriptionPut(instanceKey, groupId, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdDescriptionPut(instanceKey, groupId, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdDescriptionPut")
@@ -318,11 +318,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
- **&#x60;data&#x60;** | [**StructsGroupUpdateDescriptionPayload**](StructsGroupUpdateDescriptionPayload.md)| Group description data |
+ **&#x60;data&#x60;** | [**GroupUpdateDescriptionPayload**](GroupUpdateDescriptionPayload.md)| Group description data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -338,7 +338,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdGet"></a>
 # **instancesInstanceKeyGroupsGroupIdGet**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdGet(instanceKey, groupId)
+> APIResponse instancesInstanceKeyGroupsGroupIdGet(instanceKey, groupId)
 
 Get group.
 
@@ -354,7 +354,7 @@ val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdGet(instanceKey, groupId)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdGet(instanceKey, groupId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdGet")
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -390,7 +390,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdInviteCodeGet"></a>
 # **instancesInstanceKeyGroupsGroupIdInviteCodeGet**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdInviteCodeGet(instanceKey, groupId)
+> APIResponse instancesInstanceKeyGroupsGroupIdInviteCodeGet(instanceKey, groupId)
 
 Get group invite code.
 
@@ -406,7 +406,7 @@ val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdInviteCodeGet(instanceKey, groupId)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdInviteCodeGet(instanceKey, groupId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdInviteCodeGet")
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -442,7 +442,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdLockPut"></a>
 # **instancesInstanceKeyGroupsGroupIdLockPut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdLockPut(instanceKey, locked, groupId)
+> APIResponse instancesInstanceKeyGroupsGroupIdLockPut(instanceKey, locked, groupId)
 
 Set group locked.
 
@@ -459,7 +459,7 @@ val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instanc
 val locked : kotlin.Boolean = true // kotlin.Boolean | Locked status
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdLockPut(instanceKey, locked, groupId)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdLockPut(instanceKey, locked, groupId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdLockPut")
@@ -480,7 +480,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -496,7 +496,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdNamePut"></a>
 # **instancesInstanceKeyGroupsGroupIdNamePut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdNamePut(instanceKey, groupId, `data`)
+> APIResponse instancesInstanceKeyGroupsGroupIdNamePut(instanceKey, groupId, `data`)
 
 Set group name.
 
@@ -511,9 +511,9 @@ Changes the group name. The max limit is 22 chars
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
-val `data` : StructsGroupUpdateNamePayload =  // StructsGroupUpdateNamePayload | Group name data
+val `data` : GroupUpdateNamePayload =  // GroupUpdateNamePayload | Group name data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdNamePut(instanceKey, groupId, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdNamePut(instanceKey, groupId, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdNamePut")
@@ -530,11 +530,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
- **&#x60;data&#x60;** | [**StructsGroupUpdateNamePayload**](StructsGroupUpdateNamePayload.md)| Group name data |
+ **&#x60;data&#x60;** | [**GroupUpdateNamePayload**](GroupUpdateNamePayload.md)| Group name data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -550,7 +550,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdParticipantsAddPost"></a>
 # **instancesInstanceKeyGroupsGroupIdParticipantsAddPost**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdParticipantsAddPost(instanceKey, groupId, `data`)
+> APIResponse instancesInstanceKeyGroupsGroupIdParticipantsAddPost(instanceKey, groupId, `data`)
 
 Add participant.
 
@@ -565,9 +565,9 @@ Handles adding participants to a group. You must be admin in the group or the qu
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
-val `data` : StructsGroupUpdateParticipantsPayload =  // StructsGroupUpdateParticipantsPayload | Group update payload
+val `data` : GroupUpdateParticipantsPayload =  // GroupUpdateParticipantsPayload | Group update payload
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsAddPost(instanceKey, groupId, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsAddPost(instanceKey, groupId, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdParticipantsAddPost")
@@ -584,11 +584,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
- **&#x60;data&#x60;** | [**StructsGroupUpdateParticipantsPayload**](StructsGroupUpdateParticipantsPayload.md)| Group update payload |
+ **&#x60;data&#x60;** | [**GroupUpdateParticipantsPayload**](GroupUpdateParticipantsPayload.md)| Group update payload |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -604,7 +604,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdParticipantsDemotePut"></a>
 # **instancesInstanceKeyGroupsGroupIdParticipantsDemotePut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdParticipantsDemotePut(instanceKey, groupId, `data`)
+> APIResponse instancesInstanceKeyGroupsGroupIdParticipantsDemotePut(instanceKey, groupId, `data`)
 
 Demote participant.
 
@@ -619,9 +619,9 @@ Demotes admins in groups. You must be admin in the group or the query will fail.
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
-val `data` : StructsGroupUpdateParticipantsPayload =  // StructsGroupUpdateParticipantsPayload | Group update payload
+val `data` : GroupUpdateParticipantsPayload =  // GroupUpdateParticipantsPayload | Group update payload
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsDemotePut(instanceKey, groupId, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsDemotePut(instanceKey, groupId, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdParticipantsDemotePut")
@@ -638,11 +638,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
- **&#x60;data&#x60;** | [**StructsGroupUpdateParticipantsPayload**](StructsGroupUpdateParticipantsPayload.md)| Group update payload |
+ **&#x60;data&#x60;** | [**GroupUpdateParticipantsPayload**](GroupUpdateParticipantsPayload.md)| Group update payload |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -658,7 +658,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdParticipantsPromotePut"></a>
 # **instancesInstanceKeyGroupsGroupIdParticipantsPromotePut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdParticipantsPromotePut(instanceKey, groupId, `data`)
+> APIResponse instancesInstanceKeyGroupsGroupIdParticipantsPromotePut(instanceKey, groupId, `data`)
 
 Promote participant.
 
@@ -673,9 +673,9 @@ Promotes participants to admin. You must be admin in the group or the query will
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
-val `data` : StructsGroupUpdateParticipantsPayload =  // StructsGroupUpdateParticipantsPayload | Group update payload
+val `data` : GroupUpdateParticipantsPayload =  // GroupUpdateParticipantsPayload | Group update payload
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsPromotePut(instanceKey, groupId, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsPromotePut(instanceKey, groupId, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdParticipantsPromotePut")
@@ -692,11 +692,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
- **&#x60;data&#x60;** | [**StructsGroupUpdateParticipantsPayload**](StructsGroupUpdateParticipantsPayload.md)| Group update payload |
+ **&#x60;data&#x60;** | [**GroupUpdateParticipantsPayload**](GroupUpdateParticipantsPayload.md)| Group update payload |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -712,7 +712,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete"></a>
 # **instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete(instanceKey, groupId, `data`)
+> APIResponse instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete(instanceKey, groupId, `data`)
 
 Remove participant.
 
@@ -727,9 +727,9 @@ Handles removing participants from a group. You must be admin in the group or th
 val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
-val `data` : StructsGroupUpdateParticipantsPayload =  // StructsGroupUpdateParticipantsPayload | Group update payload
+val `data` : GroupUpdateParticipantsPayload =  // GroupUpdateParticipantsPayload | Group update payload
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete(instanceKey, groupId, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete(instanceKey, groupId, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete")
@@ -746,11 +746,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
- **&#x60;data&#x60;** | [**StructsGroupUpdateParticipantsPayload**](StructsGroupUpdateParticipantsPayload.md)| Group update payload |
+ **&#x60;data&#x60;** | [**GroupUpdateParticipantsPayload**](GroupUpdateParticipantsPayload.md)| Group update payload |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -766,7 +766,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsGroupIdProfilePicPut"></a>
 # **instancesInstanceKeyGroupsGroupIdProfilePicPut**
-> MainAPIResponse instancesInstanceKeyGroupsGroupIdProfilePicPut(instanceKey, groupId, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest)
+> APIResponse instancesInstanceKeyGroupsGroupIdProfilePicPut(instanceKey, groupId, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest)
 
 Set group picture.
 
@@ -783,7 +783,7 @@ val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instanc
 val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
 val instancesInstanceKeyGroupsGroupIdProfilePicPutRequest : InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest =  // InstancesInstanceKeyGroupsGroupIdProfilePicPutRequest | 
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdProfilePicPut(instanceKey, groupId, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsGroupIdProfilePicPut(instanceKey, groupId, instancesInstanceKeyGroupsGroupIdProfilePicPutRequest)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsGroupIdProfilePicPut")
@@ -804,7 +804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -820,7 +820,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyGroupsInviteInfoGet"></a>
 # **instancesInstanceKeyGroupsInviteInfoGet**
-> MainAPIResponse instancesInstanceKeyGroupsInviteInfoGet(instanceKey, inviteLink)
+> APIResponse instancesInstanceKeyGroupsInviteInfoGet(instanceKey, inviteLink)
 
 Get group from invite link.
 
@@ -836,7 +836,7 @@ val apiInstance = GroupManagementApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val inviteLink : kotlin.String = inviteLink_example // kotlin.String | The invite link to check
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyGroupsInviteInfoGet(instanceKey, inviteLink)
+    val result : APIResponse = apiInstance.instancesInstanceKeyGroupsInviteInfoGet(instanceKey, inviteLink)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling GroupManagementApi#instancesInstanceKeyGroupsInviteInfoGet")
@@ -856,7 +856,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 

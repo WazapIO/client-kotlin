@@ -4,7 +4,6 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesInstanceKeyBusinessCatalogGet**](MessageSendingApi.md#instancesInstanceKeyBusinessCatalogGet) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
 [**instancesInstanceKeySendAudioPost**](MessageSendingApi.md#instancesInstanceKeySendAudioPost) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
 [**instancesInstanceKeySendButtonMediaPost**](MessageSendingApi.md#instancesInstanceKeySendButtonMediaPost) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
 [**instancesInstanceKeySendButtonsPost**](MessageSendingApi.md#instancesInstanceKeySendButtonsPost) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
@@ -14,7 +13,7 @@ Method | HTTP request | Description
 [**instancesInstanceKeySendListPost**](MessageSendingApi.md#instancesInstanceKeySendListPost) | **POST** /instances/{instance_key}/send/list | Send a List message.
 [**instancesInstanceKeySendLocationPost**](MessageSendingApi.md#instancesInstanceKeySendLocationPost) | **POST** /instances/{instance_key}/send/location | Send a location message.
 [**instancesInstanceKeySendMediaPost**](MessageSendingApi.md#instancesInstanceKeySendMediaPost) | **POST** /instances/{instance_key}/send/media | Send a media message.
-[**instancesInstanceKeySendPollPost**](MessageSendingApi.md#instancesInstanceKeySendPollPost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message with media.
+[**instancesInstanceKeySendPollPost**](MessageSendingApi.md#instancesInstanceKeySendPollPost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
 [**instancesInstanceKeySendTemplateMediaPost**](MessageSendingApi.md#instancesInstanceKeySendTemplateMediaPost) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
 [**instancesInstanceKeySendTemplatePost**](MessageSendingApi.md#instancesInstanceKeySendTemplatePost) | **POST** /instances/{instance_key}/send/template | Send a template message.
 [**instancesInstanceKeySendTextPost**](MessageSendingApi.md#instancesInstanceKeySendTextPost) | **POST** /instances/{instance_key}/send/text | Send a text message.
@@ -22,59 +21,9 @@ Method | HTTP request | Description
 [**instancesInstanceKeySendVideoPost**](MessageSendingApi.md#instancesInstanceKeySendVideoPost) | **POST** /instances/{instance_key}/send/video | Send raw video.
 
 
-<a name="instancesInstanceKeyBusinessCatalogGet"></a>
-# **instancesInstanceKeyBusinessCatalogGet**
-> MainAPIResponse instancesInstanceKeyBusinessCatalogGet(instanceKey)
-
-Fetches the catlog.
-
-Gets list of all products registered by you.
-
-### Example
-```kotlin
-// Import classes:
-//import WhatsAPI.infrastructure.*
-//import models.*
-
-val apiInstance = MessageSendingApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyBusinessCatalogGet(instanceKey)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling MessageSendingApi#instancesInstanceKeyBusinessCatalogGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling MessageSendingApi#instancesInstanceKeyBusinessCatalogGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Instance key |
-
-### Return type
-
-[**MainAPIResponse**](MainAPIResponse.md)
-
-### Authorization
-
-
-Configure ApiKeyAuth:
-    ApiClient.apiKey["Authorization"] = ""
-    ApiClient.apiKeyPrefix["Authorization"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
 <a name="instancesInstanceKeySendAudioPost"></a>
 # **instancesInstanceKeySendAudioPost**
-> MainAPIResponse instancesInstanceKeySendAudioPost(instanceKey, to, instancesInstanceKeySendAudioPostRequest, caption)
+> APIResponse instancesInstanceKeySendAudioPost(instanceKey, to, instancesInstanceKeySendAudioPostRequest, caption)
 
 Send raw audio.
 
@@ -92,7 +41,7 @@ val to : kotlin.String = to_example // kotlin.String | The recipient's number
 val instancesInstanceKeySendAudioPostRequest : InstancesInstanceKeySendAudioPostRequest =  // InstancesInstanceKeySendAudioPostRequest | 
 val caption : kotlin.String = caption_example // kotlin.String | Attached caption
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendAudioPost(instanceKey, to, instancesInstanceKeySendAudioPostRequest, caption)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendAudioPost(instanceKey, to, instancesInstanceKeySendAudioPostRequest, caption)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendAudioPost")
@@ -114,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -130,7 +79,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendButtonMediaPost"></a>
 # **instancesInstanceKeySendButtonMediaPost**
-> MainAPIResponse instancesInstanceKeySendButtonMediaPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendButtonMediaPost(instanceKey, `data`)
 
 Send a button message with a media header.
 
@@ -144,9 +93,9 @@ Sends an interactive button message to the given user. This message also has med
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsButtonMessageWithMediaPayload =  // StructsButtonMessageWithMediaPayload | Message data
+val `data` : ButtonMessageWithMediaPayload =  // ButtonMessageWithMediaPayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendButtonMediaPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendButtonMediaPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendButtonMediaPost")
@@ -162,11 +111,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsButtonMessageWithMediaPayload**](StructsButtonMessageWithMediaPayload.md)| Message data |
+ **&#x60;data&#x60;** | [**ButtonMessageWithMediaPayload**](ButtonMessageWithMediaPayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -182,7 +131,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendButtonsPost"></a>
 # **instancesInstanceKeySendButtonsPost**
-> MainAPIResponse instancesInstanceKeySendButtonsPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendButtonsPost(instanceKey, `data`)
 
 Send a button message.
 
@@ -196,9 +145,9 @@ Sends an interactive button message to the given user. Make sure that all the bu
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsButtonMessagePayload =  // StructsButtonMessagePayload | Message data
+val `data` : ButtonMessagePayload =  // ButtonMessagePayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendButtonsPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendButtonsPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendButtonsPost")
@@ -214,11 +163,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsButtonMessagePayload**](StructsButtonMessagePayload.md)| Message data |
+ **&#x60;data&#x60;** | [**ButtonMessagePayload**](ButtonMessagePayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -234,7 +183,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendContactPost"></a>
 # **instancesInstanceKeySendContactPost**
-> MainAPIResponse instancesInstanceKeySendContactPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendContactPost(instanceKey, `data`)
 
 Send a contact message.
 
@@ -248,9 +197,9 @@ Sends a contact (vcard) message to the given user.
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsContactMessagePayload =  // StructsContactMessagePayload | Message data
+val `data` : ContactMessagePayload =  // ContactMessagePayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendContactPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendContactPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendContactPost")
@@ -266,11 +215,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsContactMessagePayload**](StructsContactMessagePayload.md)| Message data |
+ **&#x60;data&#x60;** | [**ContactMessagePayload**](ContactMessagePayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -286,7 +235,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendDocumentPost"></a>
 # **instancesInstanceKeySendDocumentPost**
-> MainAPIResponse instancesInstanceKeySendDocumentPost(instanceKey, to, instancesInstanceKeySendDocumentPostRequest, caption)
+> APIResponse instancesInstanceKeySendDocumentPost(instanceKey, to, instancesInstanceKeySendDocumentPostRequest, caption)
 
 Send raw document.
 
@@ -304,7 +253,7 @@ val to : kotlin.String = to_example // kotlin.String | The recipient's number
 val instancesInstanceKeySendDocumentPostRequest : InstancesInstanceKeySendDocumentPostRequest =  // InstancesInstanceKeySendDocumentPostRequest | 
 val caption : kotlin.String = caption_example // kotlin.String | Attached caption
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendDocumentPost(instanceKey, to, instancesInstanceKeySendDocumentPostRequest, caption)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendDocumentPost(instanceKey, to, instancesInstanceKeySendDocumentPostRequest, caption)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendDocumentPost")
@@ -326,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -342,7 +291,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendImagePost"></a>
 # **instancesInstanceKeySendImagePost**
-> MainAPIResponse instancesInstanceKeySendImagePost(instanceKey, to, instancesInstanceKeySendImagePostRequest, caption)
+> APIResponse instancesInstanceKeySendImagePost(instanceKey, to, instancesInstanceKeySendImagePostRequest, caption)
 
 Send raw image.
 
@@ -360,7 +309,7 @@ val to : kotlin.String = to_example // kotlin.String | The recipient's number
 val instancesInstanceKeySendImagePostRequest : InstancesInstanceKeySendImagePostRequest =  // InstancesInstanceKeySendImagePostRequest | 
 val caption : kotlin.String = caption_example // kotlin.String | Attached caption
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendImagePost(instanceKey, to, instancesInstanceKeySendImagePostRequest, caption)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendImagePost(instanceKey, to, instancesInstanceKeySendImagePostRequest, caption)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendImagePost")
@@ -382,7 +331,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -398,7 +347,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendListPost"></a>
 # **instancesInstanceKeySendListPost**
-> MainAPIResponse instancesInstanceKeySendListPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendListPost(instanceKey, `data`)
 
 Send a List message.
 
@@ -412,9 +361,9 @@ Sends an interactive List message to the given user.
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsListMessagePayload =  // StructsListMessagePayload | Message data
+val `data` : ListMessagePayload =  // ListMessagePayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendListPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendListPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendListPost")
@@ -430,11 +379,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsListMessagePayload**](StructsListMessagePayload.md)| Message data |
+ **&#x60;data&#x60;** | [**ListMessagePayload**](ListMessagePayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -450,7 +399,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendLocationPost"></a>
 # **instancesInstanceKeySendLocationPost**
-> MainAPIResponse instancesInstanceKeySendLocationPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendLocationPost(instanceKey, `data`)
 
 Send a location message.
 
@@ -464,9 +413,9 @@ Sends a location message to the given user. This is static location and does not
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsLocationMessagePayload =  // StructsLocationMessagePayload | Message data
+val `data` : LocationMessagePayload =  // LocationMessagePayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendLocationPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendLocationPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendLocationPost")
@@ -482,11 +431,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsLocationMessagePayload**](StructsLocationMessagePayload.md)| Message data |
+ **&#x60;data&#x60;** | [**LocationMessagePayload**](LocationMessagePayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -502,7 +451,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendMediaPost"></a>
 # **instancesInstanceKeySendMediaPost**
-> MainAPIResponse instancesInstanceKeySendMediaPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendMediaPost(instanceKey, `data`)
 
 Send a media message.
 
@@ -516,9 +465,9 @@ Sends a media message to the given user.
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsSendMediaPayload =  // StructsSendMediaPayload | Message data
+val `data` : SendMediaPayload =  // SendMediaPayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendMediaPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendMediaPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendMediaPost")
@@ -534,11 +483,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsSendMediaPayload**](StructsSendMediaPayload.md)| Message data |
+ **&#x60;data&#x60;** | [**SendMediaPayload**](SendMediaPayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -554,11 +503,11 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendPollPost"></a>
 # **instancesInstanceKeySendPollPost**
-> MainAPIResponse instancesInstanceKeySendPollPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendPollPost(instanceKey, `data`)
 
-Send a Poll message with media.
+Send a Poll message.
 
-Sends an interactive poll message with a media header to the given user. The poll message is a new feature that is currently in beta.
+Sends an interactive poll message to the given user. The poll message is a new feature that is currently in beta.
 
 ### Example
 ```kotlin
@@ -568,9 +517,9 @@ Sends an interactive poll message with a media header to the given user. The pol
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsPollMessagePayload =  // StructsPollMessagePayload | Message data
+val `data` : PollMessagePayload =  // PollMessagePayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendPollPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendPollPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendPollPost")
@@ -586,11 +535,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsPollMessagePayload**](StructsPollMessagePayload.md)| Message data |
+ **&#x60;data&#x60;** | [**PollMessagePayload**](PollMessagePayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -606,7 +555,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendTemplateMediaPost"></a>
 # **instancesInstanceKeySendTemplateMediaPost**
-> MainAPIResponse instancesInstanceKeySendTemplateMediaPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendTemplateMediaPost(instanceKey, `data`)
 
 Send a template message with media.
 
@@ -620,9 +569,9 @@ Sends an interactive template message with a media header to the given user. Not
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsTemplateButtonWithMediaPayload =  // StructsTemplateButtonWithMediaPayload | Message data
+val `data` : TemplateButtonWithMediaPayload =  // TemplateButtonWithMediaPayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendTemplateMediaPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendTemplateMediaPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendTemplateMediaPost")
@@ -638,11 +587,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsTemplateButtonWithMediaPayload**](StructsTemplateButtonWithMediaPayload.md)| Message data |
+ **&#x60;data&#x60;** | [**TemplateButtonWithMediaPayload**](TemplateButtonWithMediaPayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -658,7 +607,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendTemplatePost"></a>
 # **instancesInstanceKeySendTemplatePost**
-> MainAPIResponse instancesInstanceKeySendTemplatePost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendTemplatePost(instanceKey, `data`)
 
 Send a template message.
 
@@ -672,9 +621,9 @@ Sends an interactive template message to the given user. Note: The valid button 
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsTemplateButtonPayload =  // StructsTemplateButtonPayload | Message data
+val `data` : TemplateButtonPayload =  // TemplateButtonPayload | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendTemplatePost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendTemplatePost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendTemplatePost")
@@ -690,11 +639,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsTemplateButtonPayload**](StructsTemplateButtonPayload.md)| Message data |
+ **&#x60;data&#x60;** | [**TemplateButtonPayload**](TemplateButtonPayload.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -710,7 +659,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendTextPost"></a>
 # **instancesInstanceKeySendTextPost**
-> MainAPIResponse instancesInstanceKeySendTextPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeySendTextPost(instanceKey, `data`)
 
 Send a text message.
 
@@ -724,9 +673,9 @@ Sends a text message to the given user.
 
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsTextMessage =  // StructsTextMessage | Message data
+val `data` : TextMessage =  // TextMessage | Message data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendTextPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendTextPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendTextPost")
@@ -742,11 +691,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsTextMessage**](StructsTextMessage.md)| Message data |
+ **&#x60;data&#x60;** | [**TextMessage**](TextMessage.md)| Message data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -762,7 +711,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendUploadPost"></a>
 # **instancesInstanceKeySendUploadPost**
-> MainAPIResponse instancesInstanceKeySendUploadPost(instanceKey, type, instancesInstanceKeySendUploadPostRequest)
+> APIResponse instancesInstanceKeySendUploadPost(instanceKey, type, instancesInstanceKeySendUploadPostRequest)
 
 Upload media.
 
@@ -779,7 +728,7 @@ val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instanc
 val type : kotlin.String = type_example // kotlin.String | Media type
 val instancesInstanceKeySendUploadPostRequest : InstancesInstanceKeySendUploadPostRequest =  // InstancesInstanceKeySendUploadPostRequest | 
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendUploadPost(instanceKey, type, instancesInstanceKeySendUploadPostRequest)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendUploadPost(instanceKey, type, instancesInstanceKeySendUploadPostRequest)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendUploadPost")
@@ -800,7 +749,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -816,7 +765,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeySendVideoPost"></a>
 # **instancesInstanceKeySendVideoPost**
-> MainAPIResponse instancesInstanceKeySendVideoPost(instanceKey, to, instancesInstanceKeySendVideoPostRequest, caption)
+> APIResponse instancesInstanceKeySendVideoPost(instanceKey, to, instancesInstanceKeySendVideoPostRequest, caption)
 
 Send raw video.
 
@@ -834,7 +783,7 @@ val to : kotlin.String = to_example // kotlin.String | The recipient's number
 val instancesInstanceKeySendVideoPostRequest : InstancesInstanceKeySendVideoPostRequest =  // InstancesInstanceKeySendVideoPostRequest | 
 val caption : kotlin.String = caption_example // kotlin.String | Attached caption
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeySendVideoPost(instanceKey, to, instancesInstanceKeySendVideoPostRequest, caption)
+    val result : APIResponse = apiInstance.instancesInstanceKeySendVideoPost(instanceKey, to, instancesInstanceKeySendVideoPostRequest, caption)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#instancesInstanceKeySendVideoPost")
@@ -856,7 +805,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 

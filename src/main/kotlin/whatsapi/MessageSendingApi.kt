@@ -19,22 +19,22 @@ import java.io.IOException
 import okhttp3.OkHttpClient
 import okhttp3.HttpUrl
 
+import models.APIResponse
+import models.ButtonMessagePayload
+import models.ButtonMessageWithMediaPayload
+import models.ContactMessagePayload
 import models.InstancesInstanceKeySendAudioPostRequest
 import models.InstancesInstanceKeySendDocumentPostRequest
 import models.InstancesInstanceKeySendImagePostRequest
 import models.InstancesInstanceKeySendUploadPostRequest
 import models.InstancesInstanceKeySendVideoPostRequest
-import models.MainAPIResponse
-import models.StructsButtonMessagePayload
-import models.StructsButtonMessageWithMediaPayload
-import models.StructsContactMessagePayload
-import models.StructsListMessagePayload
-import models.StructsLocationMessagePayload
-import models.StructsPollMessagePayload
-import models.StructsSendMediaPayload
-import models.StructsTemplateButtonPayload
-import models.StructsTemplateButtonWithMediaPayload
-import models.StructsTextMessage
+import models.ListMessagePayload
+import models.LocationMessagePayload
+import models.PollMessagePayload
+import models.SendMediaPayload
+import models.TemplateButtonPayload
+import models.TemplateButtonWithMediaPayload
+import models.TextMessage
 
 import com.squareup.moshi.Json
 
@@ -61,82 +61,13 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * Fetches the catlog.
-     * Gets list of all products registered by you.
-     * @param instanceKey Instance key
-     * @return MainAPIResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyBusinessCatalogGet(instanceKey: kotlin.String) : MainAPIResponse {
-        val localVarResponse = instancesInstanceKeyBusinessCatalogGetWithHttpInfo(instanceKey = instanceKey)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Fetches the catlog.
-     * Gets list of all products registered by you.
-     * @param instanceKey Instance key
-     * @return ApiResponse<MainAPIResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyBusinessCatalogGetWithHttpInfo(instanceKey: kotlin.String) : ApiResponse<MainAPIResponse?> {
-        val localVariableConfig = instancesInstanceKeyBusinessCatalogGetRequestConfig(instanceKey = instanceKey)
-
-        return request<Unit, MainAPIResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation instancesInstanceKeyBusinessCatalogGet
-     *
-     * @param instanceKey Instance key
-     * @return RequestConfig
-     */
-    fun instancesInstanceKeyBusinessCatalogGetRequestConfig(instanceKey: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/instances/{instance_key}/business/catalog".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Send raw audio.
      * Sends a audio message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendAudioPostRequest 
      * @param caption Attached caption (optional)
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -145,11 +76,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendAudioPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String? = null) : MainAPIResponse {
+    fun instancesInstanceKeySendAudioPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String? = null) : APIResponse {
         val localVarResponse = instancesInstanceKeySendAudioPostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendAudioPostRequest = instancesInstanceKeySendAudioPostRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -170,16 +101,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendAudioPostRequest 
      * @param caption Attached caption (optional)
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendAudioPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String?) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendAudioPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendAudioPostRequest: InstancesInstanceKeySendAudioPostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendAudioPostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendAudioPostRequest = instancesInstanceKeySendAudioPostRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendAudioPostRequest, MainAPIResponse>(
+        return request<InstancesInstanceKeySendAudioPostRequest, APIResponse>(
             localVariableConfig
         )
     }
@@ -219,7 +150,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -228,11 +159,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendButtonMediaPost(instanceKey: kotlin.String, `data`: StructsButtonMessageWithMediaPayload) : MainAPIResponse {
+    fun instancesInstanceKeySendButtonMediaPost(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendButtonMediaPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -251,16 +182,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendButtonMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsButtonMessageWithMediaPayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendButtonMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendButtonMediaPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsButtonMessageWithMediaPayload, MainAPIResponse>(
+        return request<ButtonMessageWithMediaPayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -272,7 +203,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendButtonMediaPostRequestConfig(instanceKey: kotlin.String, `data`: StructsButtonMessageWithMediaPayload) : RequestConfig<StructsButtonMessageWithMediaPayload> {
+    fun instancesInstanceKeySendButtonMediaPostRequestConfig(instanceKey: kotlin.String, `data`: ButtonMessageWithMediaPayload) : RequestConfig<ButtonMessageWithMediaPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -292,7 +223,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive button message to the given user. Make sure that all the button ids are unique
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -301,11 +232,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendButtonsPost(instanceKey: kotlin.String, `data`: StructsButtonMessagePayload) : MainAPIResponse {
+    fun instancesInstanceKeySendButtonsPost(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendButtonsPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -324,16 +255,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive button message to the given user. Make sure that all the button ids are unique
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendButtonsPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsButtonMessagePayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendButtonsPostWithHttpInfo(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendButtonsPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsButtonMessagePayload, MainAPIResponse>(
+        return request<ButtonMessagePayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -345,7 +276,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendButtonsPostRequestConfig(instanceKey: kotlin.String, `data`: StructsButtonMessagePayload) : RequestConfig<StructsButtonMessagePayload> {
+    fun instancesInstanceKeySendButtonsPostRequestConfig(instanceKey: kotlin.String, `data`: ButtonMessagePayload) : RequestConfig<ButtonMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -365,7 +296,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a contact (vcard) message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -374,11 +305,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendContactPost(instanceKey: kotlin.String, `data`: StructsContactMessagePayload) : MainAPIResponse {
+    fun instancesInstanceKeySendContactPost(instanceKey: kotlin.String, `data`: ContactMessagePayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendContactPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -397,16 +328,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a contact (vcard) message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendContactPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsContactMessagePayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendContactPostWithHttpInfo(instanceKey: kotlin.String, `data`: ContactMessagePayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendContactPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsContactMessagePayload, MainAPIResponse>(
+        return request<ContactMessagePayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -418,7 +349,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendContactPostRequestConfig(instanceKey: kotlin.String, `data`: StructsContactMessagePayload) : RequestConfig<StructsContactMessagePayload> {
+    fun instancesInstanceKeySendContactPostRequestConfig(instanceKey: kotlin.String, `data`: ContactMessagePayload) : RequestConfig<ContactMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -440,7 +371,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendDocumentPostRequest 
      * @param caption Attached caption (optional)
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -449,11 +380,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendDocumentPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String? = null) : MainAPIResponse {
+    fun instancesInstanceKeySendDocumentPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String? = null) : APIResponse {
         val localVarResponse = instancesInstanceKeySendDocumentPostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendDocumentPostRequest = instancesInstanceKeySendDocumentPostRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -474,16 +405,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendDocumentPostRequest 
      * @param caption Attached caption (optional)
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendDocumentPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String?) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendDocumentPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendDocumentPostRequest: InstancesInstanceKeySendDocumentPostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendDocumentPostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendDocumentPostRequest = instancesInstanceKeySendDocumentPostRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendDocumentPostRequest, MainAPIResponse>(
+        return request<InstancesInstanceKeySendDocumentPostRequest, APIResponse>(
             localVariableConfig
         )
     }
@@ -525,7 +456,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendImagePostRequest 
      * @param caption Attached caption (optional)
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -534,11 +465,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendImagePost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String? = null) : MainAPIResponse {
+    fun instancesInstanceKeySendImagePost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String? = null) : APIResponse {
         val localVarResponse = instancesInstanceKeySendImagePostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendImagePostRequest = instancesInstanceKeySendImagePostRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -559,16 +490,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendImagePostRequest 
      * @param caption Attached caption (optional)
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendImagePostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String?) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendImagePostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendImagePostRequest: InstancesInstanceKeySendImagePostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendImagePostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendImagePostRequest = instancesInstanceKeySendImagePostRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendImagePostRequest, MainAPIResponse>(
+        return request<InstancesInstanceKeySendImagePostRequest, APIResponse>(
             localVariableConfig
         )
     }
@@ -608,7 +539,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive List message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -617,11 +548,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendListPost(instanceKey: kotlin.String, `data`: StructsListMessagePayload) : MainAPIResponse {
+    fun instancesInstanceKeySendListPost(instanceKey: kotlin.String, `data`: ListMessagePayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendListPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -640,16 +571,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive List message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendListPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsListMessagePayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendListPostWithHttpInfo(instanceKey: kotlin.String, `data`: ListMessagePayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendListPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsListMessagePayload, MainAPIResponse>(
+        return request<ListMessagePayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -661,7 +592,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendListPostRequestConfig(instanceKey: kotlin.String, `data`: StructsListMessagePayload) : RequestConfig<StructsListMessagePayload> {
+    fun instancesInstanceKeySendListPostRequestConfig(instanceKey: kotlin.String, `data`: ListMessagePayload) : RequestConfig<ListMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -681,7 +612,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a location message to the given user. This is static location and does not update Note: The Address and Url fields are optional
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -690,11 +621,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendLocationPost(instanceKey: kotlin.String, `data`: StructsLocationMessagePayload) : MainAPIResponse {
+    fun instancesInstanceKeySendLocationPost(instanceKey: kotlin.String, `data`: LocationMessagePayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendLocationPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -713,16 +644,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a location message to the given user. This is static location and does not update Note: The Address and Url fields are optional
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendLocationPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsLocationMessagePayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendLocationPostWithHttpInfo(instanceKey: kotlin.String, `data`: LocationMessagePayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendLocationPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsLocationMessagePayload, MainAPIResponse>(
+        return request<LocationMessagePayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -734,7 +665,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendLocationPostRequestConfig(instanceKey: kotlin.String, `data`: StructsLocationMessagePayload) : RequestConfig<StructsLocationMessagePayload> {
+    fun instancesInstanceKeySendLocationPostRequestConfig(instanceKey: kotlin.String, `data`: LocationMessagePayload) : RequestConfig<LocationMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -754,7 +685,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a media message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -763,11 +694,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendMediaPost(instanceKey: kotlin.String, `data`: StructsSendMediaPayload) : MainAPIResponse {
+    fun instancesInstanceKeySendMediaPost(instanceKey: kotlin.String, `data`: SendMediaPayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendMediaPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -786,16 +717,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a media message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsSendMediaPayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: SendMediaPayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendMediaPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsSendMediaPayload, MainAPIResponse>(
+        return request<SendMediaPayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -807,7 +738,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendMediaPostRequestConfig(instanceKey: kotlin.String, `data`: StructsSendMediaPayload) : RequestConfig<StructsSendMediaPayload> {
+    fun instancesInstanceKeySendMediaPostRequestConfig(instanceKey: kotlin.String, `data`: SendMediaPayload) : RequestConfig<SendMediaPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -823,11 +754,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * Send a Poll message with media.
-     * Sends an interactive poll message with a media header to the given user. The poll message is a new feature that is currently in beta.
+     * Send a Poll message.
+     * Sends an interactive poll message to the given user. The poll message is a new feature that is currently in beta.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -836,11 +767,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendPollPost(instanceKey: kotlin.String, `data`: StructsPollMessagePayload) : MainAPIResponse {
+    fun instancesInstanceKeySendPollPost(instanceKey: kotlin.String, `data`: PollMessagePayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendPollPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -855,20 +786,20 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
-     * Send a Poll message with media.
-     * Sends an interactive poll message with a media header to the given user. The poll message is a new feature that is currently in beta.
+     * Send a Poll message.
+     * Sends an interactive poll message to the given user. The poll message is a new feature that is currently in beta.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendPollPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsPollMessagePayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendPollPostWithHttpInfo(instanceKey: kotlin.String, `data`: PollMessagePayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendPollPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsPollMessagePayload, MainAPIResponse>(
+        return request<PollMessagePayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -880,7 +811,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendPollPostRequestConfig(instanceKey: kotlin.String, `data`: StructsPollMessagePayload) : RequestConfig<StructsPollMessagePayload> {
+    fun instancesInstanceKeySendPollPostRequestConfig(instanceKey: kotlin.String, `data`: PollMessagePayload) : RequestConfig<PollMessagePayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -900,7 +831,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive template message with a media header to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -909,11 +840,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendTemplateMediaPost(instanceKey: kotlin.String, `data`: StructsTemplateButtonWithMediaPayload) : MainAPIResponse {
+    fun instancesInstanceKeySendTemplateMediaPost(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendTemplateMediaPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -932,16 +863,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive template message with a media header to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendTemplateMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsTemplateButtonWithMediaPayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendTemplateMediaPostWithHttpInfo(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendTemplateMediaPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsTemplateButtonWithMediaPayload, MainAPIResponse>(
+        return request<TemplateButtonWithMediaPayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -953,7 +884,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendTemplateMediaPostRequestConfig(instanceKey: kotlin.String, `data`: StructsTemplateButtonWithMediaPayload) : RequestConfig<StructsTemplateButtonWithMediaPayload> {
+    fun instancesInstanceKeySendTemplateMediaPostRequestConfig(instanceKey: kotlin.String, `data`: TemplateButtonWithMediaPayload) : RequestConfig<TemplateButtonWithMediaPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -973,7 +904,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive template message to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -982,11 +913,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendTemplatePost(instanceKey: kotlin.String, `data`: StructsTemplateButtonPayload) : MainAPIResponse {
+    fun instancesInstanceKeySendTemplatePost(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : APIResponse {
         val localVarResponse = instancesInstanceKeySendTemplatePostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1005,16 +936,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends an interactive template message to the given user. Note: The valid button types are \&quot;replyButton\&quot;, \&quot;urlButton\&quot;, \&quot;callButton\&quot;
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendTemplatePostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsTemplateButtonPayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendTemplatePostWithHttpInfo(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendTemplatePostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsTemplateButtonPayload, MainAPIResponse>(
+        return request<TemplateButtonPayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -1026,7 +957,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendTemplatePostRequestConfig(instanceKey: kotlin.String, `data`: StructsTemplateButtonPayload) : RequestConfig<StructsTemplateButtonPayload> {
+    fun instancesInstanceKeySendTemplatePostRequestConfig(instanceKey: kotlin.String, `data`: TemplateButtonPayload) : RequestConfig<TemplateButtonPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1046,7 +977,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a text message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1055,11 +986,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendTextPost(instanceKey: kotlin.String, `data`: StructsTextMessage) : MainAPIResponse {
+    fun instancesInstanceKeySendTextPost(instanceKey: kotlin.String, `data`: TextMessage) : APIResponse {
         val localVarResponse = instancesInstanceKeySendTextPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1078,16 +1009,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a text message to the given user.
      * @param instanceKey Instance key
      * @param `data` Message data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendTextPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsTextMessage) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendTextPostWithHttpInfo(instanceKey: kotlin.String, `data`: TextMessage) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendTextPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsTextMessage, MainAPIResponse>(
+        return request<TextMessage, APIResponse>(
             localVariableConfig
         )
     }
@@ -1099,7 +1030,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param `data` Message data
      * @return RequestConfig
      */
-    fun instancesInstanceKeySendTextPostRequestConfig(instanceKey: kotlin.String, `data`: StructsTextMessage) : RequestConfig<StructsTextMessage> {
+    fun instancesInstanceKeySendTextPostRequestConfig(instanceKey: kotlin.String, `data`: TextMessage) : RequestConfig<TextMessage> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1130,7 +1061,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param instanceKey Instance key
      * @param type Media type
      * @param instancesInstanceKeySendUploadPostRequest 
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1139,11 +1070,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendUploadPost(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : MainAPIResponse {
+    fun instancesInstanceKeySendUploadPost(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : APIResponse {
         val localVarResponse = instancesInstanceKeySendUploadPostWithHttpInfo(instanceKey = instanceKey, type = type, instancesInstanceKeySendUploadPostRequest = instancesInstanceKeySendUploadPostRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1163,16 +1094,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param instanceKey Instance key
      * @param type Media type
      * @param instancesInstanceKeySendUploadPostRequest 
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendUploadPostWithHttpInfo(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendUploadPostWithHttpInfo(instanceKey: kotlin.String, type: Type_instancesInstanceKeySendUploadPost, instancesInstanceKeySendUploadPostRequest: InstancesInstanceKeySendUploadPostRequest) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendUploadPostRequestConfig(instanceKey = instanceKey, type = type, instancesInstanceKeySendUploadPostRequest = instancesInstanceKeySendUploadPostRequest)
 
-        return request<InstancesInstanceKeySendUploadPostRequest, MainAPIResponse>(
+        return request<InstancesInstanceKeySendUploadPostRequest, APIResponse>(
             localVariableConfig
         )
     }
@@ -1210,7 +1141,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendVideoPostRequest 
      * @param caption Attached caption (optional)
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1219,11 +1150,11 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeySendVideoPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String? = null) : MainAPIResponse {
+    fun instancesInstanceKeySendVideoPost(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String? = null) : APIResponse {
         val localVarResponse = instancesInstanceKeySendVideoPostWithHttpInfo(instanceKey = instanceKey, to = to, instancesInstanceKeySendVideoPostRequest = instancesInstanceKeySendVideoPostRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1244,16 +1175,16 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * @param to The recipient&#39;s number
      * @param instancesInstanceKeySendVideoPostRequest 
      * @param caption Attached caption (optional)
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeySendVideoPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String?) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeySendVideoPostWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, instancesInstanceKeySendVideoPostRequest: InstancesInstanceKeySendVideoPostRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeySendVideoPostRequestConfig(instanceKey = instanceKey, to = to, instancesInstanceKeySendVideoPostRequest = instancesInstanceKeySendVideoPostRequest, caption = caption)
 
-        return request<InstancesInstanceKeySendVideoPostRequest, MainAPIResponse>(
+        return request<InstancesInstanceKeySendVideoPostRequest, APIResponse>(
             localVariableConfig
         )
     }

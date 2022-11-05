@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.OkHttpClient
 import okhttp3.HttpUrl
 
-import models.MainAPIResponse
-import models.StructsUserInfoPayload
+import models.APIResponse
+import models.UserInfoPayload
 
 import com.squareup.moshi.Json
 
@@ -51,7 +51,7 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      * Returns the profile pic of the given user.
      * @param instanceKey Instance key
      * @param jid JID
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyMiscProfilePicGet(instanceKey: kotlin.String, jid: kotlin.String) : MainAPIResponse {
+    fun instancesInstanceKeyMiscProfilePicGet(instanceKey: kotlin.String, jid: kotlin.String) : APIResponse {
         val localVarResponse = instancesInstanceKeyMiscProfilePicGetWithHttpInfo(instanceKey = instanceKey, jid = jid)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,16 +83,16 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      * Returns the profile pic of the given user.
      * @param instanceKey Instance key
      * @param jid JID
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyMiscProfilePicGetWithHttpInfo(instanceKey: kotlin.String, jid: kotlin.String) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeyMiscProfilePicGetWithHttpInfo(instanceKey: kotlin.String, jid: kotlin.String) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeyMiscProfilePicGetRequestConfig(instanceKey = instanceKey, jid = jid)
 
-        return request<Unit, MainAPIResponse>(
+        return request<Unit, APIResponse>(
             localVariableConfig
         )
     }
@@ -126,7 +126,7 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      * Gets the user info for the given user ids. This does not checks if user is registered or not
      * @param instanceKey Instance key
      * @param `data` Data
-     * @return MainAPIResponse
+     * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -135,11 +135,11 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun instancesInstanceKeyMiscUserInfoPost(instanceKey: kotlin.String, `data`: StructsUserInfoPayload) : MainAPIResponse {
+    fun instancesInstanceKeyMiscUserInfoPost(instanceKey: kotlin.String, `data`: UserInfoPayload) : APIResponse {
         val localVarResponse = instancesInstanceKeyMiscUserInfoPostWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MainAPIResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,16 +158,16 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      * Gets the user info for the given user ids. This does not checks if user is registered or not
      * @param instanceKey Instance key
      * @param `data` Data
-     * @return ApiResponse<MainAPIResponse?>
+     * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun instancesInstanceKeyMiscUserInfoPostWithHttpInfo(instanceKey: kotlin.String, `data`: StructsUserInfoPayload) : ApiResponse<MainAPIResponse?> {
+    fun instancesInstanceKeyMiscUserInfoPostWithHttpInfo(instanceKey: kotlin.String, `data`: UserInfoPayload) : ApiResponse<APIResponse?> {
         val localVariableConfig = instancesInstanceKeyMiscUserInfoPostRequestConfig(instanceKey = instanceKey, `data` = `data`)
 
-        return request<StructsUserInfoPayload, MainAPIResponse>(
+        return request<UserInfoPayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -179,7 +179,7 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
      * @param `data` Data
      * @return RequestConfig
      */
-    fun instancesInstanceKeyMiscUserInfoPostRequestConfig(instanceKey: kotlin.String, `data`: StructsUserInfoPayload) : RequestConfig<StructsUserInfoPayload> {
+    fun instancesInstanceKeyMiscUserInfoPostRequestConfig(instanceKey: kotlin.String, `data`: UserInfoPayload) : RequestConfig<UserInfoPayload> {
         val localVariableBody = `data`
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

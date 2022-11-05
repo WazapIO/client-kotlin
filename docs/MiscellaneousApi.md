@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 <a name="instancesInstanceKeyMiscProfilePicGet"></a>
 # **instancesInstanceKeyMiscProfilePicGet**
-> MainAPIResponse instancesInstanceKeyMiscProfilePicGet(instanceKey, jid)
+> APIResponse instancesInstanceKeyMiscProfilePicGet(instanceKey, jid)
 
 Get profile pic.
 
@@ -26,7 +26,7 @@ val apiInstance = MiscellaneousApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val jid : kotlin.String = jid_example // kotlin.String | JID
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyMiscProfilePicGet(instanceKey, jid)
+    val result : APIResponse = apiInstance.instancesInstanceKeyMiscProfilePicGet(instanceKey, jid)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MiscellaneousApi#instancesInstanceKeyMiscProfilePicGet")
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ Configure ApiKeyAuth:
 
 <a name="instancesInstanceKeyMiscUserInfoPost"></a>
 # **instancesInstanceKeyMiscUserInfoPost**
-> MainAPIResponse instancesInstanceKeyMiscUserInfoPost(instanceKey, `data`)
+> APIResponse instancesInstanceKeyMiscUserInfoPost(instanceKey, `data`)
 
 Fetches the users info.
 
@@ -76,9 +76,9 @@ Gets the user info for the given user ids. This does not checks if user is regis
 
 val apiInstance = MiscellaneousApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
-val `data` : StructsUserInfoPayload =  // StructsUserInfoPayload | Data
+val `data` : UserInfoPayload =  // UserInfoPayload | Data
 try {
-    val result : MainAPIResponse = apiInstance.instancesInstanceKeyMiscUserInfoPost(instanceKey, `data`)
+    val result : APIResponse = apiInstance.instancesInstanceKeyMiscUserInfoPost(instanceKey, `data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MiscellaneousApi#instancesInstanceKeyMiscUserInfoPost")
@@ -94,11 +94,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
- **&#x60;data&#x60;** | [**StructsUserInfoPayload**](StructsUserInfoPayload.md)| Data |
+ **&#x60;data&#x60;** | [**UserInfoPayload**](UserInfoPayload.md)| Data |
 
 ### Return type
 
-[**MainAPIResponse**](MainAPIResponse.md)
+[**APIResponse**](APIResponse.md)
 
 ### Authorization
 
