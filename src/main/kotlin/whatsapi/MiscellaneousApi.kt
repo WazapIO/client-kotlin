@@ -20,6 +20,8 @@ import okhttp3.OkHttpClient
 import okhttp3.HttpUrl
 
 import models.APIResponse
+import models.FileUpload
+import models.UpdateProfilePicRequest
 import models.UserInfoPayload
 
 import com.squareup.moshi.Json
@@ -44,6 +46,101 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
         val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "/api")
         }
+    }
+
+    /**
+     * enum for parameter fileType
+     */
+     enum class FileType_downloadMedia(val value: kotlin.String) {
+         @Json(name = "image") image("image"),
+         @Json(name = "video") video("video"),
+         @Json(name = "audio") audio("audio"),
+         @Json(name = "document") document("document")
+     }
+
+    /**
+     * Download media
+     * Downloads the media from the given media keys.
+     * @param instanceKey Instance key
+     * @param fileType File type
+     * @param `data` Media data
+     * @param responseType Response type (file, base64) (optional)
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun downloadMedia(instanceKey: kotlin.String, fileType: FileType_downloadMedia, `data`: FileUpload, responseType: kotlin.String? = null) : APIResponse {
+        val localVarResponse = downloadMediaWithHttpInfo(instanceKey = instanceKey, fileType = fileType, `data` = `data`, responseType = responseType)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Download media
+     * Downloads the media from the given media keys.
+     * @param instanceKey Instance key
+     * @param fileType File type
+     * @param `data` Media data
+     * @param responseType Response type (file, base64) (optional)
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun downloadMediaWithHttpInfo(instanceKey: kotlin.String, fileType: FileType_downloadMedia, `data`: FileUpload, responseType: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = downloadMediaRequestConfig(instanceKey = instanceKey, fileType = fileType, `data` = `data`, responseType = responseType)
+
+        return request<FileUpload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation downloadMedia
+     *
+     * @param instanceKey Instance key
+     * @param fileType File type
+     * @param `data` Media data
+     * @param responseType Response type (file, base64) (optional)
+     * @return RequestConfig
+     */
+    fun downloadMediaRequestConfig(instanceKey: kotlin.String, fileType: FileType_downloadMedia, `data`: FileUpload, responseType: kotlin.String?) : RequestConfig<FileUpload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("file_type", listOf(fileType.toString()))
+                if (responseType != null) {
+                    put("response_type", listOf(responseType.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/misc/download".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -188,6 +285,158 @@ class MiscellaneousApi(basePath: kotlin.String = defaultBasePath, client: OkHttp
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/instances/{instance_key}/misc/user-info".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Set chat presence
+     * Sets the presence of the given chat. (Typing, Recording, Paused) Options: typing, recording, paused
+     * @param instanceKey Instance key
+     * @param jid JID
+     * @param presence Presence
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun setChatPresence(instanceKey: kotlin.String, jid: kotlin.String, presence: kotlin.String) : APIResponse {
+        val localVarResponse = setChatPresenceWithHttpInfo(instanceKey = instanceKey, jid = jid, presence = presence)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Set chat presence
+     * Sets the presence of the given chat. (Typing, Recording, Paused) Options: typing, recording, paused
+     * @param instanceKey Instance key
+     * @param jid JID
+     * @param presence Presence
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setChatPresenceWithHttpInfo(instanceKey: kotlin.String, jid: kotlin.String, presence: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = setChatPresenceRequestConfig(instanceKey = instanceKey, jid = jid, presence = presence)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setChatPresence
+     *
+     * @param instanceKey Instance key
+     * @param jid JID
+     * @param presence Presence
+     * @return RequestConfig
+     */
+    fun setChatPresenceRequestConfig(instanceKey: kotlin.String, jid: kotlin.String, presence: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("jid", listOf(jid.toString()))
+                put("presence", listOf(presence.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/misc/chat-presence".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Update profile picture
+     * Changes the profile pic of the current logged in user.
+     * @param instanceKey Instance key
+     * @param updateProfilePicRequest 
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun updateProfilePic(instanceKey: kotlin.String, updateProfilePicRequest: UpdateProfilePicRequest) : APIResponse {
+        val localVarResponse = updateProfilePicWithHttpInfo(instanceKey = instanceKey, updateProfilePicRequest = updateProfilePicRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Update profile picture
+     * Changes the profile pic of the current logged in user.
+     * @param instanceKey Instance key
+     * @param updateProfilePicRequest 
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun updateProfilePicWithHttpInfo(instanceKey: kotlin.String, updateProfilePicRequest: UpdateProfilePicRequest) : ApiResponse<APIResponse?> {
+        val localVariableConfig = updateProfilePicRequestConfig(instanceKey = instanceKey, updateProfilePicRequest = updateProfilePicRequest)
+
+        return request<UpdateProfilePicRequest, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation updateProfilePic
+     *
+     * @param instanceKey Instance key
+     * @param updateProfilePicRequest 
+     * @return RequestConfig
+     */
+    fun updateProfilePicRequestConfig(instanceKey: kotlin.String, updateProfilePicRequest: UpdateProfilePicRequest) : RequestConfig<UpdateProfilePicRequest> {
+        val localVariableBody = updateProfilePicRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/instances/{instance_key}/misc/profile-pic".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

@@ -23,17 +23,18 @@ import models.APIResponse
 import models.ButtonMessagePayload
 import models.ButtonMessageWithMediaPayload
 import models.ContactMessagePayload
+import models.GroupInviteMessagePayload
 import models.ListMessagePayload
 import models.LocationMessagePayload
 import models.PollMessagePayload
 import models.SendAudioRequest
 import models.SendDocumentRequest
-import models.SendImageRequest
 import models.SendMediaPayload
 import models.SendVideoRequest
 import models.TemplateButtonPayload
 import models.TemplateButtonWithMediaPayload
 import models.TextMessage
+import models.UpdateProfilePicRequest
 import models.UploadMediaRequest
 
 import com.squareup.moshi.Json
@@ -450,11 +451,84 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
     }
 
     /**
+     * Send a group invite message
+     * Sends a group invite message to the specified number. Don&#39;t include \&quot;https://chat.whatsapp.com/\&quot; in the invite code.
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun sendGroupInvite(instanceKey: kotlin.String, `data`: GroupInviteMessagePayload) : APIResponse {
+        val localVarResponse = sendGroupInviteWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Send a group invite message
+     * Sends a group invite message to the specified number. Don&#39;t include \&quot;https://chat.whatsapp.com/\&quot; in the invite code.
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun sendGroupInviteWithHttpInfo(instanceKey: kotlin.String, `data`: GroupInviteMessagePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendGroupInviteRequestConfig(instanceKey = instanceKey, `data` = `data`)
+
+        return request<GroupInviteMessagePayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation sendGroupInvite
+     *
+     * @param instanceKey Instance key
+     * @param `data` Message data
+     * @return RequestConfig
+     */
+    fun sendGroupInviteRequestConfig(instanceKey: kotlin.String, `data`: GroupInviteMessagePayload) : RequestConfig<GroupInviteMessagePayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/send/group-invite".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Send raw image.
      * Sends a image message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param sendImageRequest 
+     * @param updateProfilePicRequest 
      * @param caption Attached caption (optional)
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -465,8 +539,8 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun sendImage(instanceKey: kotlin.String, to: kotlin.String, sendImageRequest: SendImageRequest, caption: kotlin.String? = null) : APIResponse {
-        val localVarResponse = sendImageWithHttpInfo(instanceKey = instanceKey, to = to, sendImageRequest = sendImageRequest, caption = caption)
+    fun sendImage(instanceKey: kotlin.String, to: kotlin.String, updateProfilePicRequest: UpdateProfilePicRequest, caption: kotlin.String? = null) : APIResponse {
+        val localVarResponse = sendImageWithHttpInfo(instanceKey = instanceKey, to = to, updateProfilePicRequest = updateProfilePicRequest, caption = caption)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -488,7 +562,7 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      * Sends a image message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param sendImageRequest 
+     * @param updateProfilePicRequest 
      * @param caption Attached caption (optional)
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -496,10 +570,10 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun sendImageWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, sendImageRequest: SendImageRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = sendImageRequestConfig(instanceKey = instanceKey, to = to, sendImageRequest = sendImageRequest, caption = caption)
+    fun sendImageWithHttpInfo(instanceKey: kotlin.String, to: kotlin.String, updateProfilePicRequest: UpdateProfilePicRequest, caption: kotlin.String?) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendImageRequestConfig(instanceKey = instanceKey, to = to, updateProfilePicRequest = updateProfilePicRequest, caption = caption)
 
-        return request<SendImageRequest, APIResponse>(
+        return request<UpdateProfilePicRequest, APIResponse>(
             localVariableConfig
         )
     }
@@ -509,12 +583,12 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
      *
      * @param instanceKey Instance key
      * @param to The recipient&#39;s number
-     * @param sendImageRequest 
+     * @param updateProfilePicRequest 
      * @param caption Attached caption (optional)
      * @return RequestConfig
      */
-    fun sendImageRequestConfig(instanceKey: kotlin.String, to: kotlin.String, sendImageRequest: SendImageRequest, caption: kotlin.String?) : RequestConfig<SendImageRequest> {
-        val localVariableBody = sendImageRequest
+    fun sendImageRequestConfig(instanceKey: kotlin.String, to: kotlin.String, updateProfilePicRequest: UpdateProfilePicRequest, caption: kotlin.String?) : RequestConfig<UpdateProfilePicRequest> {
+        val localVariableBody = updateProfilePicRequest
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("to", listOf(to.toString()))

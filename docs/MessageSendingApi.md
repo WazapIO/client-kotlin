@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**sendButtonWithMedia**](MessageSendingApi.md#sendButtonWithMedia) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
 [**sendContact**](MessageSendingApi.md#sendContact) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
 [**sendDocument**](MessageSendingApi.md#sendDocument) | **POST** /instances/{instance_key}/send/document | Send raw document.
+[**sendGroupInvite**](MessageSendingApi.md#sendGroupInvite) | **POST** /instances/{instance_key}/send/group-invite | Send a group invite message
 [**sendImage**](MessageSendingApi.md#sendImage) | **POST** /instances/{instance_key}/send/image | Send raw image.
 [**sendListMessage**](MessageSendingApi.md#sendListMessage) | **POST** /instances/{instance_key}/send/list | Send a List message.
 [**sendLocation**](MessageSendingApi.md#sendLocation) | **POST** /instances/{instance_key}/send/location | Send a location message.
@@ -289,9 +290,61 @@ Configure ApiKeyAuth:
  - **Content-Type**: application/json
  - **Accept**: Not defined
 
+<a name="sendGroupInvite"></a>
+# **sendGroupInvite**
+> APIResponse sendGroupInvite(instanceKey, `data`)
+
+Send a group invite message
+
+Sends a group invite message to the specified number. Don&#39;t include \&quot;https://chat.whatsapp.com/\&quot; in the invite code.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = MessageSendingApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+val `data` : GroupInviteMessagePayload =  // GroupInviteMessagePayload | Message data
+try {
+    val result : APIResponse = apiInstance.sendGroupInvite(instanceKey, `data`)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling MessageSendingApi#sendGroupInvite")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling MessageSendingApi#sendGroupInvite")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+ **&#x60;data&#x60;** | [**GroupInviteMessagePayload**](GroupInviteMessagePayload.md)| Message data |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
 <a name="sendImage"></a>
 # **sendImage**
-> APIResponse sendImage(instanceKey, to, sendImageRequest, caption)
+> APIResponse sendImage(instanceKey, to, updateProfilePicRequest, caption)
 
 Send raw image.
 
@@ -306,10 +359,10 @@ Sends a image message by uploading to the WhatsApp servers every time. This is n
 val apiInstance = MessageSendingApi()
 val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
 val to : kotlin.String = to_example // kotlin.String | The recipient's number
-val sendImageRequest : SendImageRequest =  // SendImageRequest | 
+val updateProfilePicRequest : UpdateProfilePicRequest =  // UpdateProfilePicRequest | 
 val caption : kotlin.String = caption_example // kotlin.String | Attached caption
 try {
-    val result : APIResponse = apiInstance.sendImage(instanceKey, to, sendImageRequest, caption)
+    val result : APIResponse = apiInstance.sendImage(instanceKey, to, updateProfilePicRequest, caption)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MessageSendingApi#sendImage")
@@ -326,7 +379,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **to** | **kotlin.String**| The recipient&#39;s number |
- **sendImageRequest** | [**SendImageRequest**](SendImageRequest.md)|  |
+ **updateProfilePicRequest** | [**UpdateProfilePicRequest**](UpdateProfilePicRequest.md)|  |
  **caption** | **kotlin.String**| Attached caption | [optional]
 
 ### Return type

@@ -430,6 +430,78 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
     }
 
     /**
+     * Get all participants.
+     * Returns all participants of the group.
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAllParticipants(instanceKey: kotlin.String, groupId: kotlin.String) : APIResponse {
+        val localVarResponse = getAllParticipantsWithHttpInfo(instanceKey = instanceKey, groupId = groupId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Get all participants.
+     * Returns all participants of the group.
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAllParticipantsWithHttpInfo(instanceKey: kotlin.String, groupId: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = getAllParticipantsRequestConfig(instanceKey = instanceKey, groupId = groupId)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAllParticipants
+     *
+     * @param instanceKey Instance key
+     * @param groupId Group id of the group
+     * @return RequestConfig
+     */
+    fun getAllParticipantsRequestConfig(instanceKey: kotlin.String, groupId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/instances/{instance_key}/groups/{group_id}/participants".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Get group.
      * Fetches the group data.
      * @param instanceKey Instance key
@@ -642,6 +714,81 @@ class GroupManagementApi(basePath: kotlin.String = defaultBasePath, client: OkHt
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/instances/{instance_key}/groups/{group_id}/invite-code".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())).replace("{"+"group_id"+"}", encodeURIComponent(groupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Join group with invite code.
+     * Joins a group with group invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode} You have to put invite_code in the url of the request. The invite code is the part after https://chat.whatsapp.com/ For example, if the invite link is https://chat.whatsapp.com/dsfsf34r3d3dsds, then the invite code is &#x60;dsfsf34r3d3dsds“
+     * @param instanceKey Instance key
+     * @param inviteCode The invite code of group you want to join
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun joinGroupWithLink(instanceKey: kotlin.String, inviteCode: kotlin.String) : APIResponse {
+        val localVarResponse = joinGroupWithLinkWithHttpInfo(instanceKey = instanceKey, inviteCode = inviteCode)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Join group with invite code.
+     * Joins a group with group invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode} You have to put invite_code in the url of the request. The invite code is the part after https://chat.whatsapp.com/ For example, if the invite link is https://chat.whatsapp.com/dsfsf34r3d3dsds, then the invite code is &#x60;dsfsf34r3d3dsds“
+     * @param instanceKey Instance key
+     * @param inviteCode The invite code of group you want to join
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun joinGroupWithLinkWithHttpInfo(instanceKey: kotlin.String, inviteCode: kotlin.String) : ApiResponse<APIResponse?> {
+        val localVariableConfig = joinGroupWithLinkRequestConfig(instanceKey = instanceKey, inviteCode = inviteCode)
+
+        return request<Unit, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation joinGroupWithLink
+     *
+     * @param instanceKey Instance key
+     * @param inviteCode The invite code of group you want to join
+     * @return RequestConfig
+     */
+    fun joinGroupWithLinkRequestConfig(instanceKey: kotlin.String, inviteCode: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("invite_code", listOf(inviteCode.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/instances/{instance_key}/groups/join".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

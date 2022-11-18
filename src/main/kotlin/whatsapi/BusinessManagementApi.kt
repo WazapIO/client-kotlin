@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.HttpUrl
 
 import models.APIResponse
+import models.PaymentRequestPayload
 
 import com.squareup.moshi.Json
 
@@ -108,6 +109,79 @@ class BusinessManagementApi(basePath: kotlin.String = defaultBasePath, client: O
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/instances/{instance_key}/business/catalog".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Send a payment request.
+     * Sends an payment request to a user. Feature is still in beta.
+     * @param instanceKey Instance key
+     * @param `data` Data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun sendPaymentRequest(instanceKey: kotlin.String, `data`: PaymentRequestPayload) : APIResponse {
+        val localVarResponse = sendPaymentRequestWithHttpInfo(instanceKey = instanceKey, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Send a payment request.
+     * Sends an payment request to a user. Feature is still in beta.
+     * @param instanceKey Instance key
+     * @param `data` Data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun sendPaymentRequestWithHttpInfo(instanceKey: kotlin.String, `data`: PaymentRequestPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = sendPaymentRequestRequestConfig(instanceKey = instanceKey, `data` = `data`)
+
+        return request<PaymentRequestPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation sendPaymentRequest
+     *
+     * @param instanceKey Instance key
+     * @param `data` Data
+     * @return RequestConfig
+     */
+    fun sendPaymentRequestRequestConfig(instanceKey: kotlin.String, `data`: PaymentRequestPayload) : RequestConfig<PaymentRequestPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/business/payment-request".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

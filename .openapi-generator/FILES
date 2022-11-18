@@ -8,6 +8,7 @@ docs/ContactMessagePayload.md
 docs/ContactMessagePayloadVcard.md
 docs/FileUpload.md
 docs/GroupCreatePayload.md
+docs/GroupInviteMessagePayload.md
 docs/GroupManagementApi.md
 docs/GroupUpdateDescriptionPayload.md
 docs/GroupUpdateNamePayload.md
@@ -20,11 +21,11 @@ docs/LocationMessagePayload.md
 docs/LocationMessagePayloadLocation.md
 docs/MessageSendingApi.md
 docs/MiscellaneousApi.md
+docs/PaymentRequestPayload.md
 docs/PollMessagePayload.md
 docs/ReplyButton.md
 docs/SendAudioRequest.md
 docs/SendDocumentRequest.md
-docs/SendImageRequest.md
 docs/SendMediaPayload.md
 docs/SendVideoRequest.md
 docs/SetGroupPictureRequest.md
@@ -32,6 +33,7 @@ docs/TemplateButton.md
 docs/TemplateButtonPayload.md
 docs/TemplateButtonWithMediaPayload.md
 docs/TextMessage.md
+docs/UpdateProfilePicRequest.md
 docs/UploadMediaRequest.md
 docs/UserInfoPayload.md
 docs/WebhookPayload.md
@@ -64,6 +66,7 @@ src/main/kotlin/models/ContactMessagePayload.kt
 src/main/kotlin/models/ContactMessagePayloadVcard.kt
 src/main/kotlin/models/FileUpload.kt
 src/main/kotlin/models/GroupCreatePayload.kt
+src/main/kotlin/models/GroupInviteMessagePayload.kt
 src/main/kotlin/models/GroupUpdateDescriptionPayload.kt
 src/main/kotlin/models/GroupUpdateNamePayload.kt
 src/main/kotlin/models/GroupUpdateParticipantsPayload.kt
@@ -72,11 +75,11 @@ src/main/kotlin/models/ListMessagePayload.kt
 src/main/kotlin/models/ListSection.kt
 src/main/kotlin/models/LocationMessagePayload.kt
 src/main/kotlin/models/LocationMessagePayloadLocation.kt
+src/main/kotlin/models/PaymentRequestPayload.kt
 src/main/kotlin/models/PollMessagePayload.kt
 src/main/kotlin/models/ReplyButton.kt
 src/main/kotlin/models/SendAudioRequest.kt
 src/main/kotlin/models/SendDocumentRequest.kt
-src/main/kotlin/models/SendImageRequest.kt
 src/main/kotlin/models/SendMediaPayload.kt
 src/main/kotlin/models/SendVideoRequest.kt
 src/main/kotlin/models/SetGroupPictureRequest.kt
@@ -84,6 +87,7 @@ src/main/kotlin/models/TemplateButton.kt
 src/main/kotlin/models/TemplateButtonPayload.kt
 src/main/kotlin/models/TemplateButtonWithMediaPayload.kt
 src/main/kotlin/models/TextMessage.kt
+src/main/kotlin/models/UpdateProfilePicRequest.kt
 src/main/kotlin/models/UploadMediaRequest.kt
 src/main/kotlin/models/UserInfoPayload.kt
 src/main/kotlin/models/WebhookPayload.kt

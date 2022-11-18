@@ -9,9 +9,11 @@ Method | HTTP request | Description
 [**demoteParticipant**](GroupManagementApi.md#demoteParticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
 [**getAdminGroups**](GroupManagementApi.md#getAdminGroups) | **GET** /instances/{instance_key}/groups/admin | Get admin groups.
 [**getAllGroups**](GroupManagementApi.md#getAllGroups) | **GET** /instances/{instance_key}/groups/ | Get all groups.
+[**getAllParticipants**](GroupManagementApi.md#getAllParticipants) | **GET** /instances/{instance_key}/groups/{group_id}/participants | Get all participants.
 [**getGroup**](GroupManagementApi.md#getGroup) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
 [**getGroupFromInviteLink**](GroupManagementApi.md#getGroupFromInviteLink) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
 [**getGroupInviteCode**](GroupManagementApi.md#getGroupInviteCode) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
+[**joinGroupWithLink**](GroupManagementApi.md#joinGroupWithLink) | **GET** /instances/{instance_key}/groups/join | Join group with invite code.
 [**leaveGroup**](GroupManagementApi.md#leaveGroup) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
 [**promoteParticipant**](GroupManagementApi.md#promoteParticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
 [**removeParticipant**](GroupManagementApi.md#removeParticipant) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
@@ -284,6 +286,58 @@ Configure ApiKeyAuth:
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+<a name="getAllParticipants"></a>
+# **getAllParticipants**
+> APIResponse getAllParticipants(instanceKey, groupId)
+
+Get all participants.
+
+Returns all participants of the group.
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = GroupManagementApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+val groupId : kotlin.String = groupId_example // kotlin.String | Group id of the group
+try {
+    val result : APIResponse = apiInstance.getAllParticipants(instanceKey, groupId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling GroupManagementApi#getAllParticipants")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling GroupManagementApi#getAllParticipants")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+ **groupId** | **kotlin.String**| Group id of the group |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
 <a name="getGroup"></a>
 # **getGroup**
 > APIResponse getGroup(instanceKey, groupId)
@@ -423,6 +477,58 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **kotlin.String**| Instance key |
  **groupId** | **kotlin.String**| Group id of the group |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="joinGroupWithLink"></a>
+# **joinGroupWithLink**
+> APIResponse joinGroupWithLink(instanceKey, inviteCode)
+
+Join group with invite code.
+
+Joins a group with group invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode} You have to put invite_code in the url of the request. The invite code is the part after https://chat.whatsapp.com/ For example, if the invite link is https://chat.whatsapp.com/dsfsf34r3d3dsds, then the invite code is &#x60;dsfsf34r3d3dsds“
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = GroupManagementApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+val inviteCode : kotlin.String = inviteCode_example // kotlin.String | The invite code of group you want to join
+try {
+    val result : APIResponse = apiInstance.joinGroupWithLink(instanceKey, inviteCode)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling GroupManagementApi#joinGroupWithLink")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling GroupManagementApi#joinGroupWithLink")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+ **inviteCode** | **kotlin.String**| The invite code of group you want to join |
 
 ### Return type
 
