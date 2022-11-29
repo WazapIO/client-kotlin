@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**sendTextMessage**](MessageSendingApi.md#sendTextMessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
 [**sendVideo**](MessageSendingApi.md#sendVideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
 [**uploadMedia**](MessageSendingApi.md#uploadMedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+[**uploadMediaFromUrl**](MessageSendingApi.md#uploadMediaFromUrl) | **POST** /instances/{instance_key}/send/upload-url | Upload media from url.
 
 
 <a name="sendAudio"></a>
@@ -855,6 +856,60 @@ Name | Type | Description  | Notes
  **instanceKey** | **kotlin.String**| Instance key |
  **type** | **kotlin.String**| Media type | [enum: image, video, audio, document]
  **uploadMediaRequest** | [**UploadMediaRequest**](UploadMediaRequest.md)|  |
+
+### Return type
+
+[**APIResponse**](APIResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+<a name="uploadMediaFromUrl"></a>
+# **uploadMediaFromUrl**
+> APIResponse uploadMediaFromUrl(instanceKey, type, `data`)
+
+Upload media from url.
+
+Uploads media from a url to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+
+### Example
+```kotlin
+// Import classes:
+//import WhatsAPI.infrastructure.*
+//import models.*
+
+val apiInstance = MessageSendingApi()
+val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Instance key
+val type : kotlin.String = type_example // kotlin.String | Media type
+val `data` : UrlMediaUploadPayload =  // UrlMediaUploadPayload | Media data
+try {
+    val result : APIResponse = apiInstance.uploadMediaFromUrl(instanceKey, type, `data`)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling MessageSendingApi#uploadMediaFromUrl")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling MessageSendingApi#uploadMediaFromUrl")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **kotlin.String**| Instance key |
+ **type** | **kotlin.String**| Media type | [enum: image, video, audio, document]
+ **&#x60;data&#x60;** | [**UrlMediaUploadPayload**](UrlMediaUploadPayload.md)| Media data |
 
 ### Return type
 

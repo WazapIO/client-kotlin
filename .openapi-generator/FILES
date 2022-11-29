@@ -35,6 +35,7 @@ docs/TemplateButtonWithMediaPayload.md
 docs/TextMessage.md
 docs/UpdateProfilePicRequest.md
 docs/UploadMediaRequest.md
+docs/UrlMediaUploadPayload.md
 docs/UserInfoPayload.md
 docs/WebhookPayload.md
 gradle/wrapper/gradle-wrapper.jar
@@ -89,6 +90,7 @@ src/main/kotlin/models/TemplateButtonWithMediaPayload.kt
 src/main/kotlin/models/TextMessage.kt
 src/main/kotlin/models/UpdateProfilePicRequest.kt
 src/main/kotlin/models/UploadMediaRequest.kt
+src/main/kotlin/models/UrlMediaUploadPayload.kt
 src/main/kotlin/models/UserInfoPayload.kt
 src/main/kotlin/models/WebhookPayload.kt
 src/main/kotlin/whatsapi/BusinessManagementApi.kt

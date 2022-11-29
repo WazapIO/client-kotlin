@@ -36,6 +36,7 @@ import models.TemplateButtonWithMediaPayload
 import models.TextMessage
 import models.UpdateProfilePicRequest
 import models.UploadMediaRequest
+import models.UrlMediaUploadPayload
 
 import com.squareup.moshi.Json
 
@@ -1287,6 +1288,95 @@ class MessageSendingApi(basePath: kotlin.String = defaultBasePath, client: OkHtt
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/instances/{instance_key}/send/upload".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter type
+     */
+     enum class Type_uploadMediaFromUrl(val value: kotlin.String) {
+         @Json(name = "image") image("image"),
+         @Json(name = "video") video("video"),
+         @Json(name = "audio") audio("audio"),
+         @Json(name = "document") document("document")
+     }
+
+    /**
+     * Upload media from url.
+     * Uploads media from a url to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+     * @param instanceKey Instance key
+     * @param type Media type
+     * @param `data` Media data
+     * @return APIResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun uploadMediaFromUrl(instanceKey: kotlin.String, type: Type_uploadMediaFromUrl, `data`: UrlMediaUploadPayload) : APIResponse {
+        val localVarResponse = uploadMediaFromUrlWithHttpInfo(instanceKey = instanceKey, type = type, `data` = `data`)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Upload media from url.
+     * Uploads media from a url to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+     * @param instanceKey Instance key
+     * @param type Media type
+     * @param `data` Media data
+     * @return ApiResponse<APIResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun uploadMediaFromUrlWithHttpInfo(instanceKey: kotlin.String, type: Type_uploadMediaFromUrl, `data`: UrlMediaUploadPayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = uploadMediaFromUrlRequestConfig(instanceKey = instanceKey, type = type, `data` = `data`)
+
+        return request<UrlMediaUploadPayload, APIResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation uploadMediaFromUrl
+     *
+     * @param instanceKey Instance key
+     * @param type Media type
+     * @param `data` Media data
+     * @return RequestConfig
+     */
+    fun uploadMediaFromUrlRequestConfig(instanceKey: kotlin.String, type: Type_uploadMediaFromUrl, `data`: UrlMediaUploadPayload) : RequestConfig<UrlMediaUploadPayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("type", listOf(type.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/instances/{instance_key}/send/upload-url".replace("{"+"instance_key"+"}", encodeURIComponent(instanceKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

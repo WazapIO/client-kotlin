@@ -88,6 +88,7 @@ Class | Method | HTTP request | Description
 *MessageSendingApi* | [**sendTextMessage**](docs/MessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
 *MessageSendingApi* | [**sendVideo**](docs/MessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
 *MessageSendingApi* | [**uploadMedia**](docs/MessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+*MessageSendingApi* | [**uploadMediaFromUrl**](docs/MessageSendingApi.md#uploadmediafromurl) | **POST** /instances/{instance_key}/send/upload-url | Upload media from url.
 *MiscellaneousApi* | [**downloadMedia**](docs/MiscellaneousApi.md#downloadmedia) | **POST** /instances/{instance_key}/misc/download | Download media
 *MiscellaneousApi* | [**getProfilePic**](docs/MiscellaneousApi.md#getprofilepic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
 *MiscellaneousApi* | [**getUsersInfo**](docs/MiscellaneousApi.md#getusersinfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
@@ -128,6 +129,7 @@ Class | Method | HTTP request | Description
  - [models.TextMessage](docs/TextMessage.md)
  - [models.UpdateProfilePicRequest](docs/UpdateProfilePicRequest.md)
  - [models.UploadMediaRequest](docs/UploadMediaRequest.md)
+ - [models.UrlMediaUploadPayload](docs/UrlMediaUploadPayload.md)
  - [models.UserInfoPayload](docs/UserInfoPayload.md)
  - [models.WebhookPayload](docs/WebhookPayload.md)
 
