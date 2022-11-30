@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.HttpUrl
 
 import models.APIResponse
+import models.CreateInstancePayload
 import models.WebhookPayload
 
 import com.squareup.moshi.Json
@@ -122,7 +123,7 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     /**
      * Creates a new instance key.
      * This endpoint is used to create a new WhatsApp Web instance.
-     * @param instanceKey Insert instance key if you want to provide custom key (optional)
+     * @param `data` Instance data
      * @return APIResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -132,8 +133,8 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun createInstance(instanceKey: kotlin.String? = null) : APIResponse {
-        val localVarResponse = createInstanceWithHttpInfo(instanceKey = instanceKey)
+    fun createInstance(`data`: CreateInstancePayload) : APIResponse {
+        val localVarResponse = createInstanceWithHttpInfo(`data` = `data`)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as APIResponse
@@ -153,17 +154,17 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     /**
      * Creates a new instance key.
      * This endpoint is used to create a new WhatsApp Web instance.
-     * @param instanceKey Insert instance key if you want to provide custom key (optional)
+     * @param `data` Instance data
      * @return ApiResponse<APIResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun createInstanceWithHttpInfo(instanceKey: kotlin.String?) : ApiResponse<APIResponse?> {
-        val localVariableConfig = createInstanceRequestConfig(instanceKey = instanceKey)
+    fun createInstanceWithHttpInfo(`data`: CreateInstancePayload) : ApiResponse<APIResponse?> {
+        val localVariableConfig = createInstanceRequestConfig(`data` = `data`)
 
-        return request<Unit, APIResponse>(
+        return request<CreateInstancePayload, APIResponse>(
             localVariableConfig
         )
     }
@@ -171,21 +172,17 @@ class InstanceApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClien
     /**
      * To obtain the request config of the operation createInstance
      *
-     * @param instanceKey Insert instance key if you want to provide custom key (optional)
+     * @param `data` Instance data
      * @return RequestConfig
      */
-    fun createInstanceRequestConfig(instanceKey: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (instanceKey != null) {
-                    put("instance_key", listOf(instanceKey.toString()))
-                }
-            }
+    fun createInstanceRequestConfig(`data`: CreateInstancePayload) : RequestConfig<CreateInstancePayload> {
+        val localVariableBody = `data`
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
         
         return RequestConfig(
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             path = "/instances/create",
             query = localVariableQuery,
             headers = localVariableHeaders,

@@ -5,7 +5,7 @@ All URIs are relative to */api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**changeWebhookUrl**](InstanceApi.md#changeWebhookUrl) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
-[**createInstance**](InstanceApi.md#createInstance) | **GET** /instances/create | Creates a new instance key.
+[**createInstance**](InstanceApi.md#createInstance) | **POST** /instances/create | Creates a new instance key.
 [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
 [**getContacts**](InstanceApi.md#getContacts) | **GET** /instances/{instance_key}/contacts | Get contacts.
 [**getInstance**](InstanceApi.md#getInstance) | **GET** /instances/{instance_key}/ | Get Instance.
@@ -68,7 +68,7 @@ Configure ApiKeyAuth:
 
 <a name="createInstance"></a>
 # **createInstance**
-> APIResponse createInstance(instanceKey)
+> APIResponse createInstance(`data`)
 
 Creates a new instance key.
 
@@ -81,9 +81,9 @@ This endpoint is used to create a new WhatsApp Web instance.
 //import models.*
 
 val apiInstance = InstanceApi()
-val instanceKey : kotlin.String = instanceKey_example // kotlin.String | Insert instance key if you want to provide custom key
+val `data` : CreateInstancePayload =  // CreateInstancePayload | Instance data
 try {
-    val result : APIResponse = apiInstance.createInstance(instanceKey)
+    val result : APIResponse = apiInstance.createInstance(`data`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling InstanceApi#createInstance")
@@ -98,7 +98,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instanceKey** | **kotlin.String**| Insert instance key if you want to provide custom key | [optional]
+ **&#x60;data&#x60;** | [**CreateInstancePayload**](CreateInstancePayload.md)| Instance data |
 
 ### Return type
 
@@ -113,7 +113,7 @@ Configure ApiKeyAuth:
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 <a name="deleteInstance"></a>

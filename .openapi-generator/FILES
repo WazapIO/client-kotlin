@@ -6,6 +6,7 @@ docs/ButtonMessagePayload.md
 docs/ButtonMessageWithMediaPayload.md
 docs/ContactMessagePayload.md
 docs/ContactMessagePayloadVcard.md
+docs/CreateInstancePayload.md
 docs/FileUpload.md
 docs/GroupCreatePayload.md
 docs/GroupInviteMessagePayload.md
@@ -65,6 +66,7 @@ src/main/kotlin/models/ButtonMessagePayload.kt
 src/main/kotlin/models/ButtonMessageWithMediaPayload.kt
 src/main/kotlin/models/ContactMessagePayload.kt
 src/main/kotlin/models/ContactMessagePayloadVcard.kt
+src/main/kotlin/models/CreateInstancePayload.kt
 src/main/kotlin/models/FileUpload.kt
 src/main/kotlin/models/GroupCreatePayload.kt
 src/main/kotlin/models/GroupInviteMessagePayload.kt
